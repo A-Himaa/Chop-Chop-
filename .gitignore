@@ -44,3 +44,5 @@ Thumbs.db      # Windows
 
 # VSCode settings
 .vscode/
+
+HELP.md
