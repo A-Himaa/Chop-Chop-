@@ -1,0 +1,102 @@
+<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Enhanced animations style with slower timing -->
+  <style>
+    @keyframes wiggle {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(-3deg); }
+      75% { transform: rotate(3deg); }
+      100% { transform: rotate(0deg); }
+    }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    @keyframes colorShift {
+      0% { fill: #2E294E; }
+      50% { fill: #FF6B35; }
+      100% { fill: #2E294E; }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -1000;
+      }
+    }
+    
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-2px) translateX(2px); }
+      50% { transform: translateY(0) translateX(0); }
+      75% { transform: translateY(2px) translateX(-2px); }
+    }
+    
+    .fork {
+      transform-origin: center 20px;
+      animation: wiggle 4s ease-in-out infinite;
+    }
+    
+    .top-text {
+      animation: fadeIn 2s ease-in-out, bounce 5s ease-in-out infinite;
+    }
+    
+    .bottom-text {
+      animation: fadeIn 2s ease-in-out, colorShift 8s ease-in-out infinite;
+    }
+    
+    .steam {
+      stroke-dasharray: 10;
+      animation: dash 30s linear infinite, float 6s ease-in-out infinite;
+      opacity: 0.6;
+    }
+    
+    .circle {
+      animation: pulse 5s infinite alternate, rotate 30s linear infinite;
+    }
+    
+    .food-bit {
+      animation: float 7s ease-in-out infinite;
+    }
+  </style>
+  
+  <!-- Background Circle -->
+  <circle cx="200" cy="100" r="95" fill="none" stroke="#FF6B35" stroke-width="2" stroke-dasharray="5,5" class="circle" opacity="0.3"/>
+  
+  <!-- Steam effects -->
+  <path d="M90,20 Q100,10 110,15 Q120,5 125,15 Q130,5 140,10" stroke="#2E294E" stroke-width="2" fill="none" class="steam"/>
+  <path d="M95,15 Q105,5 115,10 Q125,0 135,5" stroke="#FF6B35" stroke-width="2" fill="none" class="steam" style="animation-delay: -3s;"/>
+  
+  <!-- Fork icon with animation -->
+  <g class="fork">
+    <path d="M110,20 L110,60 M125,20 L125,60 M140,20 L140,60" stroke="#2E294E" stroke-width="6" stroke-linecap="round"/>
+    <path d="M110,60 C110,70 125,80 125,90 L125,120" stroke="#2E294E" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M140,60 C140,70 125,80 125,90" stroke="#2E294E" stroke-width="6" stroke-linecap="round" fill="none"/>
+  </g>
+  
+  <!-- Food bits -->
+  <circle cx="150" cy="40" r="5" fill="#FF6B35" class="food-bit"/>
+  <circle cx="160" cy="100" r="4" fill="#FF6B35" class="food-bit" style="animation-delay: -2s;"/>
+  <circle cx="90" cy="90" r="6" fill="#FF6B35" class="food-bit" style="animation-delay: -4s;"/>
+  
+  <!-- Text with animations -->
+  <text x="170" y="65" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="48" fill="#2E294E" class="top-text">CHOP</text>
+  <text x="170" y="115" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="48" fill="#FF6B35" class="bottom-text">CHOP</text>
+  
+  <!-- Small tagline -->
+  <text x="200" y="150" font-family="Montserrat, Arial, sans-serif" font-size="14" fill="#2E294E" text-anchor="middle" class="food-bit">Share Your Culinary Journey</text>
+</svg>
