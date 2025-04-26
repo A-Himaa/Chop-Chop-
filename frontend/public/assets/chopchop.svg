@@ -1,0 +1,13 @@
+<svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Fork icon - thicker lines for better visibility -->
+  <path d="M110,20 L110,60 M125,20 L125,60 M140,20 L140,60" stroke="#2E294E" stroke-width="6" stroke-linecap="round"/>
+  <path d="M110,60 C110,70 125,80 125,90 L125,120" stroke="#2E294E" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M140,60 C140,70 125,80 125,90" stroke="#2E294E" stroke-width="6" stroke-linecap="round" fill="none"/>
+  
+  <!-- Text with larger size -->
+  <text x="170" y="65" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="48" fill="#2E294E">CHOP</text>
+  <text x="170" y="115" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="48" fill="#FF6B35">CHOP</text>
+  
+  
+</svg>
