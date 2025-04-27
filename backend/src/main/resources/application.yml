@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: Chopchop
+  profiles:
+    active: dev
+  data:
+    mongodb:
+      uri: mongodb+srv://akilahimaja:AZwgOd4L0VTNge50@chopchop.0vod3u4.mongodb.net/ChopChop?retryWrites=true&w=majority
+      database: ${MONGODB_DB}
+logging:
+  level:
+    org.springframework.security: DEBUG
