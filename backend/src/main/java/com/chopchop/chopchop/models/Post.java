@@ -11,7 +11,7 @@ import java.util.Date;
 @Document(collection = "posts")
 
 public class Post {
-    @Id
+    
     private String id;
     private String userId;
     private Date timestamp;
