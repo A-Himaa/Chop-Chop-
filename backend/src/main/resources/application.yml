@@ -8,7 +8,7 @@ refresh-token:
 
 spring:
   application:
-    name: Chopchop
+    name: PafBackend
   profiles:
     active: dev
   data:
