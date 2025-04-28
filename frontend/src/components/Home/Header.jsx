@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 // import AuthModal from "../Modals/AuthModal";
 
 const Header = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   
   return (
@@ -48,6 +49,7 @@ const Header = () => {
 
           <li className="link">
             <button
+              onClick={() => navigate("/community")}
               // onClick={() => {
               //   if (localStorage.getItem("userId")) {
               //     navigate("/community"); // Navigate to the feed page
