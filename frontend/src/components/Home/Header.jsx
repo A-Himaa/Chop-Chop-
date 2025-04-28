@@ -30,7 +30,7 @@ const Header = () => {
             <Link to="/explore">Explore Recipes</Link>
           </li>
           <li className="link">
-            <Link to="/trending">Trending</Link>
+            <Link to="/learning">Tutorials</Link>
           </li>
 
           <li className="link">
@@ -59,7 +59,7 @@ const Header = () => {
               // }}
               className="btn"
             >
-              Join Chop Chop
+              Join Now
             </button>
           </li>
         </ul>
