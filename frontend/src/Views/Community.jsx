@@ -9,7 +9,10 @@ const Community = () => {
   return (
     <div className="community-container">
       <header className="community-header">
+      <a href="/">
         <img src="/assets/chopchop.svg" alt="ChopChop Logo" className="logo" />
+      </a>
+
         {/* <h1 className="logo-text">ChopChop</h1> */}
         <img
           src="/assets/User.png"
