@@ -68,7 +68,7 @@ const CreatePost = () => {
 
   return (
     <Modal
-      title="Share Your Recipe"
+      title={<div style={{ textAlign: "center", fontSize: "18px"}}>Share Your Recipe</div>}
       visible={snap.createPostModalOpened} // Control modal visibility from state
       onCancel={() => state.createPostModalOpened = false} // Close modal
       footer={null}
@@ -82,15 +82,22 @@ const CreatePost = () => {
         requiredMark="optional"
         style={{ maxWidth: 600, margin: "0 auto", padding: "24px" }}
       >
+
+        <div style={{ padding: "20px", backgroundColor: "#ff5e001b", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
+        <div style={{ padding: "20px", backgroundColor: "#ffffff", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
+
         <Form.Item
           name="contentDescription"
-          label="Describe Your Dish"
+          label={<div style={{ fontWeight: "500"}}>Describe Your Dish</div>}
           rules={[{ required: true, message: "Please describe your dish" }]}>
           <Input.TextArea
             rows={4}
             placeholder="Share your recipe, ingredients, or cooking method..."
           />
         </Form.Item>
+
+        <div style={{ padding: "20px", backgroundColor: "#ff5e001b", borderRadius: "8px", border: "2px dashed rgba(255, 94, 0, 0.61)",  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
+
 
         <Form.Item
           name="mediaLink"
@@ -102,7 +109,8 @@ const CreatePost = () => {
             showUploadList={false}
             beforeUpload={() => false}
             maxCount={1}>
-            <Button
+
+              <Button
               icon={image ? (fileType === "image" ? <FileImageOutlined /> : <VideoCameraOutlined />) : <UploadOutlined />}
               disabled={imageUploading}
             >
@@ -110,11 +118,22 @@ const CreatePost = () => {
             </Button>
           </Upload>
         </Form.Item>
+        </div>
+        </div> 
+        </div>
 
         <Form.Item>
           <Button
             type="primary"
             htmlType="submit"
+            style={{
+              backgroundColor: "#ff5e00ac",
+              marginTop: "18px",
+              height: "40px",
+              color: "#ffffff",
+              fontWeight: "500",
+              fontSize: "15px"
+              }}
             loading={loading}
             disabled={imageUploading || !image}
             block
