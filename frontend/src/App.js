@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Views/Home";
 import Community from "./Views/Community";
 import Profile from "./components/Community/Profile";
+import PostsPage from "./components/Models/postmodel";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/community" element={<Community />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/posts" element={<PostsPage />} />
       </Routes>
     </BrowserRouter>
   );

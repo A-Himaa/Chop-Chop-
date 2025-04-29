@@ -1,143 +1,105 @@
-// import React, { useState } from "react";
-// import { Modal, Form, Input, Button, Upload, message, Space, Typography, Tooltip } from "antd";
-// import { UploadOutlined, FileImageOutlined, VideoCameraOutlined, InfoCircleOutlined } from "@ant-design/icons";
-// import PostService from "../../Services/PostService";
-// import UploadFileService from "../../Services/UploadFileService";
+import React, { useEffect, useState } from "react";
+import "../../Styles/community.css";
 
-// const { Title, Text } = Typography;
-// const uploader = new UploadFileService();
 
-// const CreatePostModal = ({ visible, onCancel }) => {
-//   const [form] = Form.useForm();
-//   const [loading, setLoading] = useState(false);
-//   const [imageUploading, setImageUploading] = useState(false);
-//   const [fileType, setFileType] = useState("image");
-//   const [image, setImage] = useState("");
+const PostsPage = () => {
+  const [posts, setPosts] = useState([]);
 
-//   const handleSubmit = async () => {
-//     try {
-//       setLoading(true);
-//       const values = await form.validateFields();
-      
-//       const body = {
-//         ...values,
-//         mediaLink: image,
-//         mediaType: fileType,
-//       };
-//       await PostService.createPost(body);
-//       message.success("Recipe shared successfully");
-//       form.resetFields();
-//       setImage("");
-//     } catch (error) {
-//       console.error("Form validation failed:", error);
-//       message.error("Failed to share recipe. Please try again.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+  useEffect(() => {
+    fetch("http://localhost:8080/api/posts")
+      .then((res) => res.json())
+      .then(setPosts)
+      .catch((err) => console.error("Error fetching posts:", err));
+  }, []);
 
-//   const handleFileChange = async (info) => {
-//     if (info.file) {
-//       try {
-//         setImageUploading(true);
-//         const fileType = info.file.type.split("/")[0];
-//         setFileType(fileType);
-//         const url = await uploader.uploadFile(info.fileList[0].originFileObj, "posts");
-//         setImage(url);
-//         form.setFieldsValue({ mediaLink: url });
-//         message.success(`${fileType} uploaded successfully`);
-//       } catch (error) {
-//         message.error("Upload failed. Please try again.");
-//         console.error("Upload error:", error);
-//       } finally {
-//         setImageUploading(false);
-//       }
-//     } else if (info.file.status === "removed") {
-//       setImage("");
-//       form.setFieldsValue({ mediaLink: "" });
-//     }
-//   };
+  return (
+    <div className="community-container">
+      <header className="community-header">
+      <a href="/">
+        <img src="/assets/chopchop.svg" alt="ChopChop Logo" className="logo" />
+      </a>
 
-//   const MediaPreview = () => {
-//     if (!image) return null;
-    
-//     if (fileType === "image") {
-//       return (
-//         <div style={{ marginBottom: 16, textAlign: "center" }}>
-//           <img src={image} alt="Recipe Preview" style={{ maxWidth: "100%", maxHeight: "300px", borderRadius: 12 }} />
-//         </div>
-//       );
-//     }
-    
-//     if (fileType === "video") {
-//       return (
-//         <div style={{ marginBottom: 16, textAlign: "center" }}>
-//           <video controls src={image} style={{ maxWidth: "100%", maxHeight: "300px", borderRadius: 12 }} />
-//         </div>
-//       );
-//     }
-    
-//     return null;
-//   };
+        {/* <h1 className="logo-text">ChopChop</h1> */}
+        <a href="/profile">
+          <img
+            src="/assets/User.png"
+            alt="User Avatar"
+            className="user-avatar"/>
+        </a>
+      </header>
 
-//   return (
-//     <Modal
-//       title={<Title level={4}>Share Your Recipe</Title>}
-//       onCancel={onCancel} // Close the modal when onCancel is triggered
-//       footer={null}
-//       visible={visible} // Modal visibility controlled via prop
-//       width={600}
-//       centered
-//     >
-//       <Form form={form} layout="vertical" onFinish={handleSubmit}>
-//         <Form.Item
-//           name="contentDescription"
-//           label="Describe Your Dish"
-//           rules={[{ required: true, message: "Please describe your culinary creation" }]}>
-//           <Input.TextArea rows={4} placeholder="What did you cook? Share the recipe..." />
-//         </Form.Item>
+      {/* New wrapper for the white card */}
+      <div className="community-content-card">
+        <section className="learning-plan">
+          <div className="circle-placeholder">
+            <img
+              src="/assets/plus.png"
+              alt="Create Story"
+              className="learning-avatar"
+            />
+            {/* <p className="learntext">New Story</p> */}
+          </div>
+          
+          {/* <div className="add-tag">
+            <div className="circle-placeholder"></div>
+            <p>+tag</p>
+          </div> */}
+        </section>
+        <div className="storytext">Your Story</div>
 
-//         <Form.Item
-//           name="mediaLink"
-//           label={
-//             <div style={{ display: "flex", alignItems: "center" }}>
-//               <span style={{ marginRight: 8 }}>Show Off Your Dish</span>
-//               <Tooltip title="Upload a photo or video of your delicious creation">
-//                 <InfoCircleOutlined />
-//               </Tooltip>
-//             </div>
-//           }
-//           rules={[{ required: true, message: "Please upload an image or video of your dish" }]}>
-//           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-//             <Upload
-//               accept="image/*,video/*"
-//               onChange={handleFileChange}
-//               showUploadList={false}
-//               beforeUpload={() => false}
-//               maxCount={1}
-//             >
-//               <Button icon={image ? (fileType === "image" ? <FileImageOutlined /> : <VideoCameraOutlined />) : <UploadOutlined />} disabled={imageUploading}>
-//                 {imageUploading ? "Uploading..." : image ? `${fileType} Uploaded` : "Upload Dish Photo/Video"}
-//               </Button>
-//             </Upload>
-//           </div>
-//         </Form.Item>
-
-//         {image && <Text type="success">Looks delicious! Ready to share!</Text>}
+         {/* Tabs Navigation Section */}
         
-//         <MediaPreview />
+        <section className="skill-sharing">
+          <div className="share-box">
+            {/* <img src="/assets/User.png" alt="User" className="share-avatar" /> */}
+            <h2 style={{ marginLeft: "40vw", fontWeight:"600", fontSize:"20px", marginTop: "5px" }}>Explore</h2>
+          </div>
 
-//         <Form.Item style={{ marginBottom: 0, marginTop: 20 }}>
-//           <Space style={{ display: "flex", justifyContent: "flex-end" }}>
-//             <Button onClick={onCancel} style={{ borderRadius: 12 }}>Cancel</Button>
-//             <Button type="primary" htmlType="submit" loading={loading} disabled={imageUploading || !image} style={{ borderRadius: 12 }}>
-//               {loading ? "Sharing..." : "Share Recipe"}
-//             </Button>
-//           </Space>
-//         </Form.Item>
-//       </Form>
-//     </Modal>
-//   );
-// };
+          <div style={{ padding: "20px" }}>
 
-// export default CreatePostModal;
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+
+              {posts.map((post) => (
+                <div style={{ padding: "10px", backgroundColor: "#ff5e001b", borderRadius: "5px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)", height: "auto" }}>
+
+                  <div style={{ display: "flex",justifyContent: "space-between", gap: "10px", marginBottom: "5px" }}>
+                  <div>
+                    <img src="/assets/User.png" alt="User Avatar" className="user-avatar" style={{ width: "30px", height: "30px", marginLeft: "8px", opacity: "0.8"}}/>
+                  </div>
+                  <button style={{background: "#ff5e00ac", padding: "5px", paddingLeft: "10px", paddingRight: "10px", borderRadius: "5px", color: "#ffffff", fontSize: "15px",marginRight: "8px"}}>+Follow</button>
+                  </div>
+
+                <div key={post.id} style={{ padding: "5px", width: "350px" }}>
+                <div style={{ padding: "10px", backgroundColor: "#ffffff", borderRadius: "5px" }}>
+                  <img src={post.mediaLink} alt={post.title} style={{ width: "100%", height: "auto" }} />
+                </div>
+
+                <div style={{ padding: "20px",marginTop: "8px", backgroundColor: "#ffffff", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
+                    <p style={{ whiteSpace: "pre-wrap", textAlign: "left", fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>{post.contentDescription}</p>
+                </div>
+                </div>
+                <div style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginTop: "10px",
+                  marginLeft: "200px"
+                }}
+              >
+                <button ><img src="/assets/like.png" alt="User Avatar" style={{width: "30px", marginLeft: "5px" }}/></button>
+                <button ><img src="/assets/share.png" alt="User Avatar" style={{width: "30px", marginLeft: "5px", opacity: "0.8" }}/></button>
+                <button ><img src="/assets/bookmark.png" alt="User Avatar" style={{width: "30px", marginLeft: "5px", opacity: "0.8"}}/></button>
+              </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+        </section>
+      </div>
+    </div>
+
+  );
+};
+
+export default PostsPage;
