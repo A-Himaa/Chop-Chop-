@@ -58,9 +58,9 @@ const Profile = () => {
           <h3>Posts</h3>
         </div>
         <div className="post-gallery">
-          <div className="post-card">Post 1</div>
-          <div className="post-card">Post 2</div>
-          <div className="post-card">Post 3</div>
+          <img className="post-card" src="assets\1.png"></img>
+          <img className="post-card" src="assets\1.png"></img>
+          <img className="post-card" src="assets\1.png"></img>
         </div>
       </div>
     </div>

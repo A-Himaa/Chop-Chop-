@@ -2,36 +2,49 @@ package com.chopchop.chopchop.models;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collections;
-import java.util.List;
-import org.springframework.data.mongodb.core.index.Indexed;
+import java.util.*;
 
 @Document(collection = "users")
 @Data
-@Setter
-@Getter
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User implements UserDetails {
+
     @Id
     private String id;
+
+    @Indexed(unique = true)
     private String username;
+
     private String password;
+    private String fullName;
+    private String email;
+    private String avatar; // URL to profile image
+    private String bio;
+
+    private List<String> followers = new ArrayList<>();
+    private List<String> following = new ArrayList<>();
+
+    private List<Notification> notifications = new ArrayList<>();
+
+    // Spring Security methods
+    @Override
+    public Collection getAuthorities() {
+        return Collections.emptyList();
+    }
 
     @Override
-    public List getAuthorities(){
-        return Collections.EMPTY_LIST;
-    }
-    
-    @Override
-    public boolean isAccountNonExpired(){
+    public boolean isAccountNonExpired() {
         return true;
     }
 
-    @Override 
-    public boolean isAccountNonLocked(){
+    @Override
+    public boolean isAccountNonLocked() {
         return true;
     }
 
