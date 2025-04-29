@@ -14,11 +14,12 @@ const Community = () => {
       </a>
 
         {/* <h1 className="logo-text">ChopChop</h1> */}
-        <img
-          src="/assets/User.png"
-          alt="User Avatar"
-          className="user-avatar"
-        />
+        <a href="/profile">
+          <img
+            src="/assets/User.png"
+            alt="User Avatar"
+            className="user-avatar"/>
+        </a>
       </header>
 
       {/* New wrapper for the white card */}
