@@ -4,26 +4,42 @@ import { storage } from "../firebaseConfig";
 class UploadFileService {
   // Async method to upload file to Firebase Storage
   async uploadFile(file, path) {
+    console.log("uploadFile method triggered");
     try {
       // Creating a reference to the storage location
       const fileRef = ref(storage, `${path}/${file.name}`);
-      // Uploading the file
-      const uploadTask = uploadBytesResumable(fileRef, file);
 
-      // Handling the upload progress, errors, and success status
-      return await uploadTask
-        .then(async (snapshot) => {
-          // Getting the download URL after successful upload
-          const url = await getDownloadURL(snapshot.ref);
-          return url;
-        })
-        .catch((err) => {
-          // Throwing an error if upload fails
-          throw new Error(`${err}`);
-        });
+      const uploadTask = uploadBytesResumable(fileRef, file);
+      console.log("Upload started!");
+
+
+      // Returning a promise that resolves to the download URL after upload completion
+      return new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log(`Upload is ${progress}% done`);
+          },
+
+          (err) => {
+            reject(new Error(`Upload failed: ${err.message}`));
+          },
+
+          async () => {
+            try {
+              const url = await getDownloadURL(uploadTask.snapshot.ref);
+              resolve(url);
+            } catch (error) {
+              reject(new Error(`Failed to get download URL: ${error.message}`));
+            }
+          }
+        );
+      });
     } catch (error) {
-      // Throwing an error if the entire try block fails
-      throw new Error(`${error}`);
+      // Catching any other unexpected errors
+      throw new Error(`Unexpected error: ${error.message}`);
     }
   }
 }
