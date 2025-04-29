@@ -27,6 +27,7 @@ const CreatePost = () => {
         userId: snap.currentUser?.uid,
         mediaType: fileType,
       };
+      
       await PostService.createPost(body);
       state.posts = await PostService.getPosts();
       message.success("Recipe shared successfully");
@@ -48,10 +49,10 @@ const CreatePost = () => {
         const type = info.file.type.split("/")[0];
         setFileType(type);
         const url = await uploader.uploadFile(
-          info.fileList[0].originFileObj,
-          "posts"
+          info.fileList[0].originFileObj,  // The file to upload
+          "posts"  // The Firebase storage path where the file will be uploaded
         );
-        setImage(url);
+        setImage(url);  // Set the uploaded image URL
         form.setFieldsValue({ mediaLink: url });
         message.success(`${type} uploaded successfully`);
       } catch (error) {
@@ -65,6 +66,7 @@ const CreatePost = () => {
       form.setFieldsValue({ mediaLink: "" });
     }
   };
+  
 
   return (
     <Modal
