@@ -43,7 +43,7 @@ const Community = () => {
 
          {/* Tabs Navigation Section */}
         <div className="tabs">
-          <Link to="/explore" className="tab">Explore Recipes</Link>
+          <Link to="/posts" className="tab">Explore Recipes</Link>
 
           <button 
             className="tab" 
