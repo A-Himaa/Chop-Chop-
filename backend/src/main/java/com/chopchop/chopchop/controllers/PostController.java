@@ -28,18 +28,23 @@ public class PostController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    // READ posts by User ID
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<Post>> getPostsByUserId(@PathVariable String userId) {
-        List<Post> posts = postRepository.findByUserId(userId);
-        return new ResponseEntity<>(posts, HttpStatus.OK);
-    }
 
     // CREATE a new post
     @PostMapping
     public ResponseEntity<Post> createPost(@RequestBody Post post) {
         Post savedPost = postRepository.save(post);
         return new ResponseEntity<>(savedPost, HttpStatus.CREATED);
+    }
+
+    //Delete post
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable String id) {
+        if (postRepository.existsById(id)) {
+            postRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
