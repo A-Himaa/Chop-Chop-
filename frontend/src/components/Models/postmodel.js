@@ -83,9 +83,12 @@ const PostsPage = () => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   marginTop: "10px",
-                  marginLeft: "200px"
+                  marginLeft: "8px",
+                  height: "15px",
+                  borderRadius: "8px"
                 }}
               >
+                <input type="text"/>
                 <button ><img src="/assets/like.png" alt="User Avatar" style={{width: "30px", marginLeft: "5px" }}/></button>
                 <button ><img src="/assets/share.png" alt="User Avatar" style={{width: "30px", marginLeft: "5px", opacity: "0.8" }}/></button>
                 <button ><img src="/assets/bookmark.png" alt="User Avatar" style={{width: "30px", marginLeft: "5px", opacity: "0.8"}}/></button>
