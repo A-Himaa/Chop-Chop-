@@ -1,52 +1,53 @@
 package com.chopchop.chopchop.controllers;
 
-import com.chopchop.chopchop.models.User;
-import com.chopchop.chopchop.models.Notification;
-import com.chopchop.chopchop.service.UserService;
+import com.chopchop.chopchop.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.*;
-
+import java.util.List;
+import java.util.Optional;
+import com.chopchop.chopchop.models.User;
+import com.chopchop.chopchop.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
 @RestController
-@RequestMapping("/api/profile")
+@CrossOrigin(origins = "http3000://localhost:")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
+    // Create a new user
+    @PostMapping("/create")
+    public User createUser(@RequestBody User user) {
+        return userRepository.save(user);
+    }
+
+    // Retrieve all users
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    // Retrieve a user by ID
     @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable String id) {
-        return userService.getUserById(id);
+        return userRepository.findById(id);
     }
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable String id, @RequestBody User newUserData) {
-        return userService.updateUser(id, newUserData);
+
+
+    // Delete a user by ID
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable String id) {
+        userRepository.deleteById(id);
     }
 
-    @GetMapping("/{id}/followers")
-    public List<String> getFollowers(@PathVariable String id) {
-        return userService.getFollowers(id);
+    @GetMapping("/exists/{username}")
+    public ResponseEntity<Boolean> checkIfUserExists(@PathVariable String username) {
+        boolean userExists = userRepository.existsByUsername(username);
+        return ResponseEntity.ok(userExists);
     }
 
-    @GetMapping("/{id}/following")
-    public List<String> getFollowing(@PathVariable String id) {
-        return userService.getFollowing(id);
-    }
 
-    @PostMapping("/{followerId}/follow/{followeeId}")
-    public void followUser(@PathVariable String followerId, @PathVariable String followeeId) {
-        userService.followUser(followerId, followeeId);
-    }
-
-    @GetMapping("/{id}/notifications")
-    public List<Notification> getNotifications(@PathVariable String id) {
-        return userService.getNotifications(id);
-    }
-
-    @PutMapping("/{id}/notifications/read")
-    public void markNotificationsAsRead(@PathVariable String id) {
-        userService.markAllNotificationsAsRead(id);
-    }
 }

@@ -58,8 +58,13 @@ const Profile = () => {
           <h3>Posts</h3>
         </div>
         <div className="post-gallery">
-          <img className="post-card" src="assets\1.png"></img>
-          <img className="post-card" src="assets\1.png"></img>
+          <img className="post-card" src="assets\1.jpg"></img>
+          <img className="post-card" src="assets\2.jpg"></img>
+          <img className="post-card" src="assets\1.jpg"></img>
+        </div>
+        <div className="post-gallery">
+          <img className="post-card" src="assets\1.jpg"></img>
+          <img className="post-card" src="assets\2.jpg"></img>
           <img className="post-card" src="assets\1.png"></img>
         </div>
       </div>
