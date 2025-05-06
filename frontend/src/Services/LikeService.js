@@ -18,7 +18,31 @@ class LikeService {
     }
   }
 
-  
+  async createLike(likeData, username, userId) {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const response = await axios.post(`${BASE_URL}/likes`, likeData, config);
+      if (response.status === 201) {
+        try {
+          const body = {
+            userId: userId,
+            message: "You have a new like",
+            description: "Your post liked by " + username,
+          };
+
+          await NotificationService.createNotification(body);
+        } catch (error) {}
+      }
+      return response.data;
+    } catch (error) {
+      throw new Error("Failed to create like");
+    }
+  }
 
   async deleteLike(likeId) {
     try {
