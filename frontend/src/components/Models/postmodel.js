@@ -2,15 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../../Styles/community.css";
 import { getCommentsByPostId, addComment } from "../../api/comment";
 
-
 const PostsPage = () => {
   const [posts, setPosts] = useState([]);
-
   const [commentInputs, setCommentInputs] = useState({});
   const [comments, setComments] = useState({});
-=======
   const [activeMenuPostId, setActiveMenuPostId] = useState(null);
-
 
   const dropdownButtonStyle = {
     width: "100%",
@@ -23,43 +19,37 @@ const PostsPage = () => {
     fontFamily: "Poppins, sans-serif",
     color: "#333",
     transition: "background-color 0.2s",
-    
   };
-  
-// Delete Option  
-const handleDelete = async (postId) => {
-  const confirmDelete = window.confirm("Are you sure you want to delete this post?");
-  if (!confirmDelete) return;
 
-  try {
-    const response = await fetch(`http://localhost:8080/api/posts/${postId}`, {
-      method: "DELETE",
-    });
+  const handleDelete = async (postId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    if (!confirmDelete) return;
 
-    if (response.ok) {
-  
-      setPosts(prevPosts => prevPosts.filter(post => post.id !== postId));
-      alert("Post deleted successfully.");
-    } else if (response.status === 404) {
-      alert("Post not found or already deleted.");
-    } else {
-      alert("Failed to delete post. Please try again.");
+    try {
+      const response = await fetch(`http://localhost:8080/api/posts/${postId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+        alert("Post deleted successfully.");
+      } else if (response.status === 404) {
+        alert("Post not found or already deleted.");
+      } else {
+        alert("Failed to delete post. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("An error occurred while deleting the post.");
     }
-  } catch (error) {
-    console.error("Error deleting post:", error);
-    alert("An error occurred while deleting the post.");
-  }
-};
-
-
-
+  };
 
   useEffect(() => {
     fetch("http://localhost:8080/api/posts")
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
-        data.forEach(post => loadCommentsForPost(post.id));
+        data.forEach((post) => loadCommentsForPost(post.id));
       })
       .catch((err) => console.error("Error fetching posts:", err));
   }, []);
@@ -67,14 +57,14 @@ const handleDelete = async (postId) => {
   const loadCommentsForPost = async (postId) => {
     try {
       const res = await getCommentsByPostId(postId);
-      setComments(prev => ({ ...prev, [postId]: res.data }));
+      setComments((prev) => ({ ...prev, [postId]: res.data }));
     } catch (error) {
       console.error("Error loading comments:", error);
     }
   };
 
   const handleInputChange = (postId, value) => {
-    setCommentInputs(prev => ({ ...prev, [postId]: value }));
+    setCommentInputs((prev) => ({ ...prev, [postId]: value }));
   };
 
   const handleCommentSubmit = async (postId) => {
@@ -85,9 +75,9 @@ const handleDelete = async (postId) => {
       await addComment({
         postId,
         userId: "demoUser123",
-        content
+        content,
       });
-      setCommentInputs(prev => ({ ...prev, [postId]: "" }));
+      setCommentInputs((prev) => ({ ...prev, [postId]: "" }));
       await loadCommentsForPost(postId);
     } catch (error) {
       console.error("Error adding comment:", error);
@@ -110,7 +100,6 @@ const handleDelete = async (postId) => {
           <div className="circle-placeholder">
             <img src="/assets/plus.png" alt="Create Story" className="learning-avatar" />
           </div>
-
         </section>
         <div className="storytext">Your Story</div>
 
@@ -122,127 +111,133 @@ const handleDelete = async (postId) => {
           <div style={{ padding: "20px" }}>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               {posts.map((post) => (
-
-                <div key={post.id} style={{ padding: "10px", backgroundColor: "#ff5e001b", borderRadius: "5px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)", height: "auto" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: "10px", marginBottom: "5px" }}>
-                    <div>
-                      <img src="/assets/User.png" alt="User Avatar" className="user-avatar" style={{ width: "30px", height: "30px", marginLeft: "8px", opacity: "0.8" }} />
+                <div
+                  key={post.id}
+                  style={{
+                    padding: "10px",
+                    backgroundColor: "#ff5e001b",
+                    borderRadius: "5px",
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                    width: "370px",
+                  }}
+                >
+                  {/* Top Section */}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div style={{ position: "relative" }}>
+                      <img
+                        src="/assets/User.png"
+                        alt="User Avatar"
+                        className="user-avatar"
+                        style={{ width: "30px", height: "30px", opacity: "0.8", cursor: "pointer" }}
+                        onClick={() =>
+                          setActiveMenuPostId(activeMenuPostId === post.id ? null : post.id)
+                        }
+                      />
+                      {/* Dropdown Menu */}
+                      {activeMenuPostId === post.id && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "35px",
+                            left: "0",
+                            backgroundColor: "#fff",
+                            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                            borderRadius: "6px",
+                            padding: "8px",
+                            zIndex: 10,
+                            width: "120px",
+                          }}
+                        >
+                          <button
+                            style={dropdownButtonStyle}
+                            onMouseOver={(e) => (e.target.style.backgroundColor = "#ff5e00ac")}
+                            onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+                          >
+                            Update
+                          </button>
+                          <hr style={{ margin: "5px 0", border: "none", height: "1px", backgroundColor: "#ddd" }} />
+                          <button
+                            style={dropdownButtonStyle}
+                            onMouseOver={(e) => (e.target.style.backgroundColor = "#ff5e00ac")}
+                            onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+                            onClick={() => handleDelete(post.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </div>
-                    <button style={{ background: "#ff5e00ac", padding: "5px 10px", borderRadius: "5px", color: "#ffffff", fontSize: "15px", marginRight: "8px" }}>+Follow</button>
+                    <button style={{ background: "#ff5e00ac", padding: "5px 10px", borderRadius: "5px", color: "#ffffff" }}>
+                      +Follow
+                    </button>
                   </div>
 
-                  <div style={{ padding: "5px", width: "350px" }}>
-                    <div style={{ padding: "10px", backgroundColor: "#ffffff", borderRadius: "5px" }}>
-                      <img src={post.mediaLink} alt={post.title} style={{ width: "100%", height: "auto" }} />
-                    </div>
-
-                    <div style={{ padding: "20px", marginTop: "8px", backgroundColor: "#ffffff", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
-                      <p style={{ whiteSpace: "pre-wrap", textAlign: "left", fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>{post.contentDescription}</p>
-                    </div>
+                  {/* Post Image */}
+                  <div style={{ marginTop: "10px" }}>
+                    <img src={post.mediaLink} alt={post.title} style={{ width: "100%", borderRadius: "5px" }} />
                   </div>
 
-                  <div style={{ marginTop: "10px", marginLeft: "8px", display: "flex", alignItems: "center", gap: "5px" }}>
+                  {/* Description */}
+                  <div
+                    style={{
+                      backgroundColor: "#fff",
+                      borderRadius: "8px",
+                      padding: "10px",
+                      marginTop: "10px",
+                    }}
+                  >
+                    <p style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif", whiteSpace: "pre-wrap" }}>
+                      {post.contentDescription}
+                    </p>
+                  </div>
+
+                  {/* Comment Input */}
+                  <div style={{ marginTop: "10px", display: "flex", gap: "5px" }}>
                     <input
                       type="text"
                       placeholder="Comment"
                       value={commentInputs[post.id] || ""}
                       onChange={(e) => handleInputChange(post.id, e.target.value)}
-                      style={{ flexGrow: 1, padding: "6px", borderRadius: "5px", border: "1px solid #ccc", marginTop: "4px", marginBottom: "4px" }}
+                      style={{
+                        flex: 1,
+                        padding: "6px",
+                        borderRadius: "5px",
+                        border: "1px solid #ccc",
+                      }}
                     />
                     <button onClick={() => handleCommentSubmit(post.id)}>Post</button>
-
-                <div style={{ padding: "10px", backgroundColor: "#ff5e001b", borderRadius: "5px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)", height: "auto", position: "relative", }}>
-
-                  <div style={{ display: "flex",justifyContent: "space-between", gap: "10px", marginBottom: "5px" }}>
-
-                  {/* User icon */}
-                  <div style = {{ position: "relative", display: "inline-block" }}>
-                  <img
-                    src="/assets/User.png"
-                    alt="User Avatar"
-                    className="user-avatar"
-                    style={{ width: "30px", height: "30px", marginLeft: "8px", opacity: "0.8", cursor: "pointer" }}
-                    onClick={() => setActiveMenuPostId(activeMenuPostId === post.id ? null : post.id)}
-
-                  />
-                  {/* Menu  */}
-                  {activeMenuPostId === post.id && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "33px",
-                        left: "0",
-                        backgroundColor: "#fff",
-                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                        borderRadius: "6px",
-                        padding: "8px",
-                        zIndex: 10,
-                        width: "120px"
-                      }}
-                    >
-                      <button
-                        style={{
-                          ...dropdownButtonStyle,
-                          marginBottom: "5px",
-                          width: "100%",
-                          textAlign: "left",
-                          padding: "6px",
-                          border: "none",
-                          background: "transparent",
-                          cursor: "pointer",
-                          borderRadius: "5px",
-                          transition: "background-color 0.2s",
-                        }}
-                        onMouseOver={(e) => (e.target.style.backgroundColor = "#ff5e00ac")}
-                        onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
-                      >
-                        Update
-                      </button>
-
-                      <div style={{ margin: "3px 0" }}>
-                        <hr style={{ border: "0", height: "1px", backgroundColor: "#ddd" }} />
-                      </div>
-
-                      <button
-                        style={{
-                          ...dropdownButtonStyle,
-                          width: "100%",
-                          textAlign: "left",
-                          padding: "6px",
-                          border: "none",
-                          background: "transparent",
-                          cursor: "pointer",
-                          borderRadius: "5px",
-                          transition: "background-color 0.2s",
-                        }}
-                        onMouseOver={(e) => (e.target.style.backgroundColor = "#ff5e00ac")}
-                        onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
-                        onClick={() => handleDelete(post.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-
-
                   </div>
 
-                  <button style={{background: "#ff5e00ac", padding: "5px", paddingLeft: "10px", paddingRight: "10px", borderRadius: "5px", color: "#ffffff", fontSize: "15px",marginRight: "8px"}}>+Follow</button>
-
-                  </div>
-
-                  <div style={{ marginLeft: "8px", marginTop: "5px" }}>
+                  {/* Comment List */}
+                  <div style={{ marginTop: "8px" }}>
                     {(comments[post.id] || []).map((comment) => (
-                      <div key={comment.id} style={{ fontSize: "14px", marginBottom: "3px", backgroundColor: "#fff", padding: "4px 8px", borderRadius: "5px" }}>
+                      <div
+                        key={comment.id}
+                        style={{
+                          backgroundColor: "#fff",
+                          borderRadius: "5px",
+                          padding: "6px",
+                          fontSize: "14px",
+                          marginBottom: "4px",
+                        }}
+                      >
                         <strong>{comment.userId}:</strong> {comment.content}
                       </div>
                     ))}
                   </div>
 
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "10px", marginLeft: "8px", height: "15px", borderRadius: "8px" }}>
-                    <button><img src="/assets/like.png" alt="Like" style={{ width: "30px", marginLeft: "5px" }} /></button>
-                    <button><img src="/assets/share.png" alt="Share" style={{ width: "30px", marginLeft: "5px", opacity: "0.8" }} /></button>
-                    <button><img src="/assets/bookmark.png" alt="Bookmark" style={{ width: "30px", marginLeft: "5px", opacity: "0.8" }} /></button>
+                  {/* Post Actions */}
+                  <div
+                    style={{
+                      marginTop: "10px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button><img src="/assets/like.png" alt="Like" style={{ width: "30px" }} /></button>
+                    <button><img src="/assets/share.png" alt="Share" style={{ width: "30px", opacity: "0.8" }} /></button>
+                    <button><img src="/assets/bookmark.png" alt="Bookmark" style={{ width: "30px", opacity: "0.8" }} /></button>
                   </div>
                 </div>
               ))}
