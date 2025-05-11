@@ -1,12 +1,12 @@
-package com.example.pafbackend.controllers;
+package com.chop.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.pafbackend.models.Comment;
-import com.example.pafbackend.models.User;
-import com.example.pafbackend.repositories.CommentRepository;
-import com.example.pafbackend.repositories.UserRepository;
+import com.chop.backend.models.Comment;
+import com.chop.backend.models.User;
+import com.chop.backend.repositories.CommentRepository;
+import com.chop.backend.repositories.UserRepository;
 
 import java.util.List;
 import java.util.Optional;

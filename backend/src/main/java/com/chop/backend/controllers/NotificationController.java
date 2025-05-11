@@ -1,4 +1,4 @@
-package com.example.pafbackend.controllers;
+package com.chop.backend.controllers;
 
 import com.chop.backend.models.Notification;
 import com.chop.backend.repositories.NotificationRepository;

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.chop.backend.models.UserProfile;
-import com.com.backend.repositories.UserProfileRepository;
+import com.chop.backend.repositories.UserProfileRepository;
 
 import java.util.List;
 import java.util.Optional;

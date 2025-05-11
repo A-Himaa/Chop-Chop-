@@ -1,6 +1,6 @@
-package com.example.pafbackend.repositories;
+package com.chop.backend.repositories;
 
-import com.example.pafbackend.models.UserConnection;
+import com.chop.backend.models.UserConnection;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
