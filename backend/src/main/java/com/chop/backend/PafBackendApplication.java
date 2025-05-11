@@ -1,4 +1,4 @@
-package com.chopchop.chopchop;
+package com.chop.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,10 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @EnableMongoRepositories
-public class ChopchopApplication {
+public class PafBackendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ChopchopApplication.class, args);
+        SpringApplication.run(PafBackendApplication.class, args);
     }
 
     @Bean
