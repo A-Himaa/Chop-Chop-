@@ -1,4 +1,4 @@
-package com.chop.backend.repositories;
+package com.example.pafbackend.repositories;
 
 import com.example.pafbackend.models.StoryStatusUpdate;
 import org.springframework.data.mongodb.repository.MongoRepository;

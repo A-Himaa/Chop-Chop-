@@ -1,4 +1,4 @@
-package com.chop.backend.dto;
+package com.example.pafbackend.dto;
 import lombok.Getter;
 import lombok.Setter;
 

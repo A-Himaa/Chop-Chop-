@@ -1,4 +1,4 @@
-package com.chop.backend.services;
+package com.example.pafbackend.services;
 
 import com.example.pafbackend.models.User;
 import com.example.pafbackend.repositories.UserRepository;
