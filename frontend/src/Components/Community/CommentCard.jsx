@@ -32,10 +32,10 @@ const CommentCard = ({ comment }) => {
       {userData && (
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
+            display: "flex ",
+            flexDirection: "row ",
+            alignItems: "center ",
+            justifyContent: "center ",
             marginBottom: 4,
             gap: 16,
           }}
