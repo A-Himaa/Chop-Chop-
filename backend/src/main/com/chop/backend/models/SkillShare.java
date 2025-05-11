@@ -1,4 +1,4 @@
-package com.example.pafbackend.models;
+package com.chop.backend.models;
 
 import lombok.Getter;
 import lombok.Setter;

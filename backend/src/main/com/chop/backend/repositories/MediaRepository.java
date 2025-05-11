@@ -1,4 +1,4 @@
-package com.example.pafbackend.repositories;
+package com.chop.backend.repositories;
 
 import com.example.pafbackend.models.Media;
 import org.springframework.data.mongodb.repository.MongoRepository;

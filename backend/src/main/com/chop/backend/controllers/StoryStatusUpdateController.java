@@ -1,4 +1,4 @@
-package com.example.pafbackend.controllers;
+package com.chop.backend.controllers;
 
 import com.example.pafbackend.models.StoryStatusUpdate;
 import com.example.pafbackend.repositories.StoryStatusUpdateRepository;

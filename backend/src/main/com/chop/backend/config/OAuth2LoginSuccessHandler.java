@@ -1,4 +1,4 @@
-package com.example.pafbackend.config;
+package com.chop.backend.config;
 
 
 import jakarta.servlet.ServletException;
