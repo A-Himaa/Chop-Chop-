@@ -1,6 +1,6 @@
-package com.example.pafbackend.repositories;
+package com.chop.backend.repositories;
 
-import com.example.pafbackend.models.LearningProgress;
+import com.chop.backend.models.LearningProgress;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
