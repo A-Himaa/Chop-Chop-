@@ -1,7 +1,7 @@
 package com.chop.backend.config;
 
 import com.chop.backend.models.User;
-import com.chop.ackend.dto.TokenDTO;
+import com.chop.backend.dto.TokenDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
