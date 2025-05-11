@@ -1,7 +1,7 @@
-package com.example.pafbackend.controllers;
+package com.chop.backend.controllers;
 
-import com.example.pafbackend.models.LearningProgress;
-import com.example.pafbackend.repositories.LearningProgressRepository;
+import com.chop.backend.models.LearningProgress;
+import com.chop.backend.repositories.LearningProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
