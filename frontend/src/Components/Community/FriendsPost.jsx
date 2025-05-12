@@ -42,21 +42,20 @@ import CommentCard from "./CommentCard";
 
 const { Text, Title, Paragraph } = Typography;
 
-// Enhanced theme colors for more visual depth
 const themeColors = {
-  primary: "#FF6B35", // Vibrant orange for primary actions
-  secondary: "#FF9E44", // Lighter orange for secondary elements
-  accent: "#7DCE82", // Fresh green accent
-  background: "#FFF9F5", // Warm off-white background
-  surface: "#FFF0E6", // Slightly darker surface for contrast
-  cardBg: "#FFFFFF", // Crisp white for cards
-  textPrimary: "#2D2A32", // Dark charcoal for readability
-  textSecondary: "#6D6A75", // Medium gray for secondary text
-  border: "rgba(255, 107, 53, 0.15)", // Subtle orange-tinted border
-  hover: "#E85A24", // Darker orange for hover states
-  danger: "#FF5252", // Clear red for warnings
-  success: "#27AE60", // Fresh green for success messages
-  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", // Orange gradient
+  primary: "#FF6B35", 
+  secondary: "#FF9E44", 
+  accent: "#7DCE82", 
+  background: "#FFF9F5", 
+  surface: "#FFF0E6", 
+  cardBg: "#FFFFFF", 
+  textPrimary: "#2D2A32", 
+  textSecondary: "#6D6A75", 
+  border: "rgba(255, 107, 53, 0.15)",
+  hover: "#E85A24",
+  danger: "#FF5252", 
+  success: "#27AE60",
+  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", 
 };
 
 const FriendsPost = ({ post }) => {
@@ -344,6 +343,7 @@ const FriendsPost = ({ post }) => {
               >
                 {userData?.username}
               </Text>
+              
               <Space size={4} style={{ marginTop: 2 }}>
                 <Text style={{ 
                   color: themeColors.textSecondary, 
@@ -376,7 +376,7 @@ const FriendsPost = ({ post }) => {
                 icon={<MoreOutlined />} 
                 style={{ 
                   color: themeColors.textPrimary,
-                  fontSize: 20,
+                  fontSize: 30,
                   borderRadius: '50%',
                   width: 36,
                   height: 36,
@@ -393,9 +393,10 @@ const FriendsPost = ({ post }) => {
           <Paragraph style={{ 
             color: themeColors.textPrimary, 
             marginBottom: 16,
-            fontSize: 15,
+            fontSize: 20,
             lineHeight: '1.6',
-            whiteSpace: 'pre-line'
+            whiteSpace: 'pre-line',
+            marginLeft: 10,
           }}>
             {post.contentDescription}
           </Paragraph>
@@ -428,11 +429,13 @@ const FriendsPost = ({ post }) => {
         }}>
           <img
             style={{
-              width: '100%',
-              maxHeight: 600,
+              width: '75%',
+              maxHeight: 500,
               objectFit: 'cover',
               transition: 'transform 0.5s ease',
               transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+              display: 'block',
+              margin: '0 auto' 
             }}
             alt="post-media"
             src={post?.mediaLink}
