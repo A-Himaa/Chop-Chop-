@@ -147,13 +147,13 @@ const CenterSection = () => {
             src="/assets/chopchop.svg" 
             alt="logo" 
           />
-          <span style={{ 
+          {/* <span style={{ 
             background: themeColors.gradient,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent"
           }}>
             ChopChop
-          </span>
+          </span> */}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <Badge count={snap.notifications?.length || 0} offset={[-5, 5]}>

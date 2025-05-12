@@ -15,8 +15,6 @@ public class SkillShare {
     private String id;
     private String userId;
     private String mealDetails;
-    private String dietaryPreferences;
-    private List<String> mediaUrls;  // Changed from single mediaUrl to list
-    private List<String> mediaTypes; // List to store media types (image/video)
-    private String ingredients;
+    private List<String> mediaUrls;  
+    private List<String> mediaTypes; 
 }
