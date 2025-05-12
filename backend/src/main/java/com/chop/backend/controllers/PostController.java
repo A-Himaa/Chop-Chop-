@@ -22,30 +22,35 @@ public class PostController {
     }
 
 
-
+    // Retrieve all posts
     @GetMapping
     public ResponseEntity<List<Post>> getPosts() {
         List<Post> posts = postRepository.findAll();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
+    //Retrive posts by user ID
     @GetMapping("/{userId}")
     public ResponseEntity<List<Post>> getPostsByUserId(@PathVariable String userId) {
         List<Post> posts = postRepository.findByUserId(userId);
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
+    //Create posts
     @PostMapping
     public ResponseEntity<Post> createPost(@RequestBody Post post) {
         Post savedPost = postRepository.save(post);
         return new ResponseEntity<>(savedPost, HttpStatus.CREATED);
     }
 
+    //Delete function
     @DeleteMapping("/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable String postId) {
         postRepository.deleteById(postId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    //Update function
     @PutMapping("/{postId}")
     public ResponseEntity<Post> updatePost(@PathVariable String postId, @RequestBody Post updatedPost) {
         Optional<Post> optionalPost = postRepository.findById(postId);

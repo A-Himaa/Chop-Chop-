@@ -47,7 +47,7 @@ const themeColors = {
 };
 
 // Learning icons to display in the header instead of subtitle text
-const learningIcons = ["👨‍🍳", "🧠", "📝", "🎓", "💡", "🔍", "📊", "🧩", "🤔", "⚡", "🌟", "✏️"];
+const learningIcons = ["🍳", "🍅", "🥕", "🥗", "🍚", "🍲", "🍕", "🍣", "🥩", "🥑", "🌽", "🌮"];
 
 const uploader = new UploadFileService();
 const { Option } = Select;

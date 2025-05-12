@@ -21,30 +21,35 @@ public class SkillShareController {
         this.SkillShareRepository = SkillShareRepository;
     }
     
+    //Retrieve all recipie posts
     @GetMapping
     public ResponseEntity<List<SkillShare>> getSkillShares() {
         List<SkillShare> SkillShares = SkillShareRepository.findAll();
         return new ResponseEntity<>(SkillShares, HttpStatus.OK);
     }
     
+    //Filter by ID
     @GetMapping("/{userId}")
     public ResponseEntity<List<SkillShare>> getSkillSharesByUserId(@PathVariable String userId) {
         List<SkillShare> SkillShares = SkillShareRepository.findByUserId(userId);
         return new ResponseEntity<>(SkillShares, HttpStatus.OK);
     }
     
+    //Create function
     @PostMapping
     public ResponseEntity<SkillShare> createSkillShare(@RequestBody SkillShare SkillShare) {
         SkillShare savedSkillShare = SkillShareRepository.save(SkillShare);
         return new ResponseEntity<>(savedSkillShare, HttpStatus.CREATED);
     }
     
+    //Delete function
     @DeleteMapping("/{SkillShareId}")
     public ResponseEntity<Void> deleteSkillShare(@PathVariable String SkillShareId) {
         SkillShareRepository.deleteById(SkillShareId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
+    //Update function
     @PutMapping("/{SkillShareId}")
     public ResponseEntity<SkillShare> updateSkillShare(@PathVariable String SkillShareId, @RequestBody SkillShare updatedSkillShare) {
         // Check if the Skill Share with the given ID exists
