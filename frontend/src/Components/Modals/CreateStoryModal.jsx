@@ -505,13 +505,13 @@ const CreateStoryModal = () => {
         <Form.Item label={
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: 8, color: themeColors.textPrimary, fontWeight: 600 }}>
-              Exercise Type
+              Recipe Type
             </span>
             <InfoCircleOutlined style={{ color: themeColors.textSecondary }} />
           </div>
         } name="exerciseType">
           <Input
-            placeholder="What type of exercise?"
+            placeholder="What type of Recipe?"
             name="exerciseType"
             value={formData.exerciseType}
             onChange={handleInputChange}
