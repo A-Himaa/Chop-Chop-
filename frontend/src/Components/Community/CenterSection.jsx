@@ -255,7 +255,7 @@ const CenterSection = () => {
                   color: activeTab === "1" ? themeColors.primary : themeColors.textPrimary,
                   transition: "all 0.3s ease"
                 }}>
-                  Social Engagement
+                  Posts
                 </span>
               </div>
             } 
@@ -395,7 +395,7 @@ const CenterSection = () => {
                   color: activeTab === "3" ? themeColors.primary : themeColors.textPrimary,
                   transition: "all 0.3s ease"
                 }}>
-                  Skill Sharing
+                  Explore Recipe
                 </span>
               </div>
             } 
@@ -435,8 +435,8 @@ const CenterSection = () => {
                           color: themeColors.textSecondary
                         }}>
                           <i className="fas fa-lightbulb" style={{ fontSize: "32px", marginBottom: "16px" }}></i>
-                          <Title level={4}>No skill shares yet</Title>
-                          <p>Share your skills and knowledge with others!</p>
+                          <Title level={4}>No recipes shared yet</Title>
+                          <p>Share your yummy recipes with others!</p>
                         </div>
                       </Col>
                     ) : (

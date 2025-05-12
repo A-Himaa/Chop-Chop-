@@ -17,23 +17,23 @@ const { Title, Text, Paragraph } = Typography;
 const uploader = new UploadFileService();
 
 const themeColors = {
-  primary: "#FF6B35", // Vibrant orange for primary actions
-  secondary: "#FF9E44", // Lighter orange for secondary elements
-  accent: "#7DCE82", // Fresh green accent
-  background: "#FFF9F5", // Warm off-white background
-  surface: "#FFF0E6", // Slightly darker surface for contrast
-  cardBg: "#FFFFFF", // Crisp white for cards
-  textPrimary: "#2D2A32", // Dark charcoal for readability
-  textSecondary: "#6D6A75", // Medium gray for secondary text
-  border: "rgba(255, 107, 53, 0.15)", // Subtle orange-tinted border
-  hover: "#E85A24", // Darker orange for hover states
-  danger: "#FF5252", // Clear red for warnings
-  success: "#27AE60", // Fresh green for success messages
-  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", // Orange gradient
+  primary: "#FF6B35", 
+  secondary: "#FF9E44", 
+  accent: "#7DCE82", 
+  background: "#FFF9F5", 
+  surface: "#FFF0E6", 
+  cardBg: "#FFFFFF",
+  textPrimary: "#2D2A32", 
+  textSecondary: "#6D6A75", 
+  border: "rgba(255, 107, 53, 0.15)", 
+  hover: "#E85A24", 
+  danger: "#FF5252", 
+  success: "#27AE60", 
+  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", 
 };
 
 // Skill icons to display in the header instead of subtitle text
-const skillIcons = ["🔧", "💪", "🎨", "🚀", "🛠️", "⚙️", "🎯", "🧠", "🧩", "🕹️", "🧰", "🧪"];
+const skillIcons = ["🍕", "🍟", "🌭", "🥞", "🥗", "🥪", "🍜", "🍪", "🍰", "🧋", "🍸", "🍹", "🍨", "🍿"];
 
 const CreateSkillShareModal = () => {
   const snap = useSnapshot(state);
@@ -137,6 +137,7 @@ const CreateSkillShareModal = () => {
     setMediaFiles(prev => prev.filter(file => file.uid !== uid));
   };
 
+  //Media preview section
   const renderMediaPreview = () => {
     return (
       <>
@@ -292,7 +293,7 @@ const CreateSkillShareModal = () => {
               <ShareAltOutlined />
             </div>
             <Title level={4} style={{ margin: 0, color: themeColors.textPrimary }}>
-              Share Your Skills
+              Share Your Delicious Recipe
             </Title>
           </div>
           
@@ -304,7 +305,7 @@ const CreateSkillShareModal = () => {
             padding: "4px 0",
             overflow: "hidden",
             position: "relative",
-            height: "28px",
+            height: "40px",
             marginBottom: "4px"
           }}>
             <div style={{
@@ -317,7 +318,7 @@ const CreateSkillShareModal = () => {
                 <span 
                   key={index} 
                   style={{ 
-                    fontSize: "18px",
+                    fontSize: "25px",
                     opacity: index % 2 === 0 ? 0.9 : 0.7,
                     transform: `scale(${index % 3 === 0 ? 1.2 : 1})`,
                   }}
@@ -461,7 +462,7 @@ const CreateSkillShareModal = () => {
         opacity: 0.03,
         zIndex: 0
       }}>
-        🔧
+        🍿
       </div>
       <div style={{
         position: "absolute",
@@ -472,7 +473,7 @@ const CreateSkillShareModal = () => {
         opacity: 0.03,
         zIndex: 0
       }}>
-        ✨
+        🍨
       </div>
 
       <Form form={form} layout="vertical" requiredMark="optional" style={{ position: "relative", zIndex: 1 }}>
@@ -480,18 +481,18 @@ const CreateSkillShareModal = () => {
           name="mealDetails"
           label={
             <div style={{ display: "flex", alignItems: "center" }}>
-              <span style={{ marginRight: 8, color: themeColors.textPrimary, fontWeight: 600 }}>
-                Skill Description
+              <span style={{ marginRight: 8, color: themeColors.textPrimary, fontWeight: 600, fontSize: 18 }}>
+                Recipe Description
               </span>
-              <Tooltip title="Share detailed information about your skills or techniques">
+              <Tooltip title="Share details of your recipe">
                 <InfoCircleOutlined style={{ color: themeColors.textSecondary }} />
               </Tooltip>
             </div>
           }
-          rules={[{ required: true, message: "Please share details about your skills" }]}
+          rules={[{ required: true, message: "Please share details of your recipe" }]}
         >
           <Input.TextArea 
-            placeholder="Describe your skills, techniques, or areas of expertise in detail" 
+            placeholder="Briefly describe the dish - its flavor, texture, origin, or why you love making it." 
             rows={4}
             style={{ 
               borderRadius: 12, 
@@ -543,14 +544,14 @@ const CreateSkillShareModal = () => {
             right: 10,
             fontSize: 16,
             opacity: 0.2,
-          }}>🎨</div>
+          }}>🥗</div>
           <div style={{
             position: "absolute",
             bottom: 10,
             left: 10,
             fontSize: 16,
             opacity: 0.2,
-          }}>🎯</div>
+          }}>🍜</div>
 
           <div style={{ 
             display: "flex", 

@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8080/api/SkillShares";
 
 const SkillShareService = {
-  // Get all Skill Shares
+  // Get all recipe posts
   getAllSkillShares: async () => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -16,11 +16,11 @@ const SkillShareService = {
       return response.data;
     } catch (error) {
       console.error("Error fetching Skill Shares:", error);
-      throw error; // Throw the error to handle it in the component
+      throw error; 
     }
   },
 
-  // Get Skill Shares by user ID
+  // Get recipe by user ID
   getSkillSharesByUserId: async (userId) => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -54,7 +54,7 @@ const SkillShareService = {
     }
   },
 
-  // Update an existing Skill Share
+  // Update recipe
   updateSkillShare: async (SkillShareId, updatedSkillShareData) => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -75,7 +75,7 @@ const SkillShareService = {
     }
   },
 
-  // Delete a Skill Share by ID
+  // Delete recipe
   deleteSkillShare: async (SkillShareId) => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
