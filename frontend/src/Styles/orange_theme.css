@@ -1,0 +1,17 @@
+.orange-modal .ant-modal-content {
+  border-top: 4px solid orange;
+}
+
+.orange-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: orange !important;
+}
+
+.orange-tabs .ant-tabs-ink-bar {
+  background-color: orange !important;
+}
+
+.orange-tab-content {
+  border: 2px solid orange;
+  padding: 8px;
+  border-radius: 8px;
+}

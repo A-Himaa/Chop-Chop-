@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Modal, 
-  Switch, 
-  Input, 
-  Button, 
-  Upload, 
-  message, 
-  Form, 
-  Divider, 
-  Avatar, 
-  Tooltip, 
-  Space
+import {
+  Modal,
+  Switch,
+  Input,
+  Button,
+  Upload,
+  message,
+  Form,
+  Divider,
+  Avatar,
+  Tooltip,
+  Space,
 } from "antd";
-import { 
-  UploadOutlined, 
-  UserOutlined, 
-  EditOutlined, 
-  LockOutlined, 
-  UnlockOutlined, 
-  LogoutOutlined, 
-  ProfileOutlined, 
-  AimOutlined
+import {
+  UploadOutlined,
+  UserOutlined,
+  EditOutlined,
+  LockOutlined,
+  UnlockOutlined,
+  LogoutOutlined,
+  ProfileOutlined,
+  AimOutlined,
 } from "@ant-design/icons";
 import { useSnapshot } from "valtio";
 import state from "../../Utils/Store";
@@ -31,27 +31,31 @@ import { useNavigate } from "react-router-dom";
 const { TextArea } = Input;
 const uploader = new UploadFileService();
 
+const orangeTheme = {
+  primary: "#fa8c16",
+  lightBg: "#fff7ef",
+  border: "#ffe0ba",
+};
+
 const UserProfileModal = () => {
   const snap = useSnapshot(state);
   const [form] = Form.useForm();
   const [uploadUserLoading, setUploadUserLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const navigate = useNavigate();
-  
-  // Get user data from localStorage if state doesn't have it
+
   const getUserData = () => {
     if (snap.currentUser) {
       return snap.currentUser;
     }
-    
-    const storedUser = localStorage.getItem('currentUser');
+
+    const storedUser = localStorage.getItem("currentUser");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      // Update state with user from localStorage
       state.currentUser = parsedUser;
       return parsedUser;
     }
-    
+
     return {
       username: "",
       biography: "",
@@ -61,46 +65,20 @@ const UserProfileModal = () => {
       uid: "",
     };
   };
-  
+
   const [updatedUser, setUpdatedUser] = useState(getUserData());
-  
-  // Reset form values when currentUser changes
+
   useEffect(() => {
     const userData = getUserData();
     setUpdatedUser(userData);
-    
     form.setFieldsValue({
       username: userData.username,
       biography: userData.biography,
       fitnessGoals: userData.fitnessGoals,
       profileVisibility: userData.profileVisibility,
-      image: userData.image
+      image: userData.image,
     });
   }, [snap.currentUser, form]);
-
-  // Modal styling
-  const modalStyle = {
-    borderRadius: "12px",
-    overflow: "hidden"
-  };
-  
-  const footerStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "10px 16px",
-    borderTop: "1px solid #f0f0f0"
-  };
-
-  const profileImageStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "16px 0",
-    padding: "16px",
-    borderRadius: "8px",
-    backgroundColor: "#f9f9f9"
-  };
 
   const closeModal = () => {
     state.profileModalOpend = false;
@@ -109,22 +87,16 @@ const UserProfileModal = () => {
   const handleUpdate = async (values) => {
     try {
       setUpdateLoading(true);
-      
       const updatedUserData = {
         ...updatedUser,
         biography: values.biography,
         fitnessGoals: values.fitnessGoals,
-        profileVisibility: values.profileVisibility
+        profileVisibility: values.profileVisibility,
       };
-      
+
       await UserService.updateUserPrifile(updatedUserData);
-      
-      // Update state
       state.currentUser = updatedUserData;
-      
-      // Save to localStorage
-      localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
-      
+      localStorage.setItem("currentUser", JSON.stringify(updatedUserData));
       closeModal();
       message.success("Profile updated successfully");
     } catch (error) {
@@ -150,21 +122,18 @@ const UserProfileModal = () => {
           info.fileList[0].originFileObj,
           "userImages"
         );
-        
         const updatedUserData = { ...updatedUser, image: url };
         setUpdatedUser(updatedUserData);
-        
-        // Update localStorage with new image
-        const storedUser = localStorage.getItem('currentUser');
+
+        const storedUser = localStorage.getItem("currentUser");
         if (storedUser) {
           const parsedUser = JSON.parse(storedUser);
           parsedUser.image = url;
-          localStorage.setItem('currentUser', JSON.stringify(parsedUser));
-          // Update state as well
+          localStorage.setItem("currentUser", JSON.stringify(parsedUser));
           state.currentUser = parsedUser;
         }
-        
-        form.setFieldValue('image', url);
+
+        form.setFieldValue("image", url);
         message.success("Image uploaded successfully");
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -175,11 +144,37 @@ const UserProfileModal = () => {
     }
   };
 
+  const modalStyle = {
+    borderRadius: "12px",
+    overflow: "hidden",
+  };
+
+  const profileImageStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "16px 0",
+    padding: "20px",
+    borderRadius: "12px",
+    backgroundColor: orangeTheme.lightBg,
+    border: `1px dashed ${orangeTheme.border}`,
+    boxShadow: "0 2px 8px rgba(250, 140, 22, 0.1)",
+  };
+
+  const Label = ({ icon, text }) => (
+    <Space style={{ color: orangeTheme.primary, fontWeight: 500 }}>
+      {icon} {text}
+    </Space>
+  );
+
   return (
     <Modal
       title={
         <div style={{ textAlign: "center", padding: "12px 0 0" }}>
-          <h2 style={{ margin: 0, fontSize: "20px" }}>My Profile</h2>
+          <h2 style={{ margin: 0, fontSize: "22px", color: orangeTheme.primary }}>
+            My Profile
+          </h2>
         </div>
       }
       open={snap.profileModalOpend}
@@ -198,17 +193,17 @@ const UserProfileModal = () => {
           biography: updatedUser.biography,
           fitnessGoals: updatedUser.fitnessGoals,
           profileVisibility: updatedUser.profileVisibility,
-          image: updatedUser.image
+          image: updatedUser.image,
         }}
         onFinish={handleUpdate}
       >
         <div style={profileImageStyle}>
-          <Avatar 
-            size={100} 
+          <Avatar
+            size={100}
             src={updatedUser.image}
             icon={!updatedUser.image && <UserOutlined />}
+            style={{ border: `2px solid ${orangeTheme.primary}` }}
           />
-          
           <Form.Item name="image" style={{ marginTop: "16px", marginBottom: 0 }}>
             <Upload
               accept="image/*"
@@ -217,11 +212,12 @@ const UserProfileModal = () => {
               beforeUpload={() => false}
               maxCount={1}
             >
-              <Button 
-                icon={<UploadOutlined />} 
+              <Button
+                icon={<UploadOutlined />}
                 loading={uploadUserLoading}
                 type="primary"
                 ghost
+                style={{ borderColor: orangeTheme.primary, color: orangeTheme.primary }}
               >
                 {updatedUser.image ? "Change Photo" : "Upload Photo"}
               </Button>
@@ -229,50 +225,28 @@ const UserProfileModal = () => {
           </Form.Item>
         </div>
 
-        <Divider plain>Profile Information</Divider>
+        <Divider style={{ borderColor: orangeTheme.border, color: orangeTheme.primary }}>
+          Profile Information
+        </Divider>
 
-        <Form.Item
-          name="username"
-          label={
-            <Space>
-              <UserOutlined />
-              <span>Username</span>
-            </Space>
-          }
-        >
+        <Form.Item name="username" label={<Label icon={<UserOutlined />} text="Username" />}>
           <Input disabled />
         </Form.Item>
 
         <Form.Item
           name="biography"
-          label={
-            <Space>
-              <ProfileOutlined />
-              <span>Biography</span>
-            </Space>
-          }
+          label={<Label icon={<ProfileOutlined />} text="Biography" />}
           rules={[{ required: true, message: "Please enter your biography" }]}
         >
-          <TextArea
-            placeholder="Tell others about yourself"
-            autoSize={{ minRows: 3, maxRows: 5 }}
-          />
+          <TextArea placeholder="Tell others about yourself" autoSize={{ minRows: 3, maxRows: 5 }} />
         </Form.Item>
 
         <Form.Item
           name="fitnessGoals"
-          label={
-            <Space>
-              <AimOutlined />
-              <span>Skill Goals</span>
-            </Space>
-          }
+          label={<Label icon={<AimOutlined />} text="Skill Goals" />}
           rules={[{ required: true, message: "Please enter your skill goals" }]}
         >
-          <TextArea
-            placeholder="What skills do you want to achieve?"
-            autoSize={{ minRows: 2, maxRows: 4 }}
-          />
+          <TextArea placeholder="What skills do you want to achieve?" autoSize={{ minRows: 2, maxRows: 4 }} />
         </Form.Item>
 
         <Form.Item
@@ -285,34 +259,30 @@ const UserProfileModal = () => {
           }
           valuePropName="checked"
         >
-          <Switch 
-            checkedChildren="Public" 
+          <Switch
+            checkedChildren="Public"
             unCheckedChildren="Private"
+            style={{ backgroundColor: orangeTheme.primary }}
           />
         </Form.Item>
 
-        <Divider />
-        
-        <div style={footerStyle}>
+        <Divider style={{ borderColor: orangeTheme.border }} />
+
+        <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 12 }}>
           <Tooltip title="Log out of your account">
-            <Button 
-              icon={<LogoutOutlined />} 
-              danger 
-              onClick={handleLogout}
-            >
+            <Button icon={<LogoutOutlined />} danger onClick={handleLogout}>
               Log Out
             </Button>
           </Tooltip>
-          
+
           <Space>
-            <Button onClick={closeModal}>
-              Cancel
-            </Button>
+            <Button onClick={closeModal}>Cancel</Button>
             <Button
               type="primary"
               htmlType="submit"
               icon={<EditOutlined />}
               loading={updateLoading}
+              style={{ backgroundColor: orangeTheme.primary, borderColor: orangeTheme.primary }}
             >
               Update Profile
             </Button>

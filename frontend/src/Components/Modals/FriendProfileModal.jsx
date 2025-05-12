@@ -4,14 +4,15 @@ import { useSnapshot } from "valtio";
 import state from "../../Utils/Store";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
-import FriendsPost from "../Community/FriendsPost";
 import "../../Styles/center_section.css";
 import "../../Styles/right_section.css";
 import "../../Styles/community.css";
 import "../../Styles/left_section.css";
+import "../../Styles/orange_theme.css"; 
 import LearningProgressCard from "../Community/LearningProgressCard";
 import SkillShareCard from "../Community/SkillShareCard";
 import UserConnectionService from "../../Services/UserConnectionService";
+
 const { TabPane } = Tabs;
 
 const FriendProfileModal = () => {
@@ -19,6 +20,7 @@ const FriendProfileModal = () => {
   const [userData, setUserData] = useState();
   const [isFriend, setIsFriend] = useState(false);
   const [addFriendLoading, setAddFriendLoading] = useState(false);
+
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
@@ -31,7 +33,7 @@ const FriendProfileModal = () => {
       .then((res) => {
         setUserData(res.data);
       })
-      .catch((err) => {});
+      .catch(() => {});
   }, [snap.selectedUserProfile]);
 
   const addFriend = async () => {
@@ -45,23 +47,10 @@ const FriendProfileModal = () => {
         message.success("Friend added successfully!");
         setIsFriend(true);
       } catch (error) {
-        console.error("Error adding friend:", error);
         message.error("Failed to add friend. Please try again later.");
       }
     } else {
       message.warning("You are already friends with this user.");
-    }
-  };
-  const checkFriendshipStatus = async () => {
-    try {
-      const connections = await UserConnectionService.getUserConnections(
-        snap.currentUser?.uid
-      );
-      if (connections.friendIds.includes(snap.selectedUserProfile.id)) {
-        setIsFriend(true);
-      }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -80,12 +69,26 @@ const FriendProfileModal = () => {
     }
   };
 
+  const checkFriendshipStatus = async () => {
+    try {
+      const connections = await UserConnectionService.getUserConnections(
+        snap.currentUser?.uid
+      );
+      if (connections.friendIds.includes(snap.selectedUserProfile.id)) {
+        setIsFriend(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     checkFriendshipStatus();
   }, []);
 
   return (
     <Modal
+      className="orange-modal"
       onCancel={() => {
         state.friendProfileModalOpened = false;
       }}
@@ -103,9 +106,14 @@ const FriendProfileModal = () => {
             gap: 8,
           }}
         >
-          <h1>{userData?.username}</h1>
+          <Avatar
+            size={64}
+            src={snap.selectedUserProfile?.image}
+            style={{ border: "2px solid orange" }}
+          />
+          <h1 style={{ color: "orange" }}>{userData?.username}</h1>
           <h2>{snap.selectedUserProfile?.biography}</h2>
-          <Avatar size={64} src={snap.selectedUserProfile?.image} />
+
           {snap.selectedUserProfile?.id !== snap.currentUser?.uid && (
             <div>
               {isFriend ? (
@@ -120,6 +128,7 @@ const FriendProfileModal = () => {
               ) : (
                 <Button
                   type="primary"
+                  style={{ backgroundColor: "orange", borderColor: "orange" }}
                   loading={addFriendLoading}
                   onClick={addFriend}
                 >
@@ -130,17 +139,22 @@ const FriendProfileModal = () => {
           )}
         </div>
       </Row>
-      <Tabs defaultActiveKey="1">
+
+      <Tabs
+        defaultActiveKey="1"
+        className="orange-tabs"
+        tabBarStyle={{ color: "orange" }}
+      >
         <TabPane tab="Posts" key="1">
           <Row gutter={[16, 16]}>
             {snap.posts
               .filter((post) => post.userId === snap.selectedUserProfile.id)
               .map((post) => (
                 <Col key={post.id} span={6}>
-                  <div style={{ padding: "8px", border: "1px solid #eaeaea" }}>
+                  <div className="orange-tab-content">
                     <img
                       src={post.mediaLink}
-                      style={{ height: "100%", maxWidth: 200, fill: "cover" }}
+                      style={{ height: "100%", maxWidth: 300, fill: "cover" }}
                     />
                   </div>
                 </Col>
