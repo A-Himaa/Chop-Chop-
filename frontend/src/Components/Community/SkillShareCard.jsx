@@ -7,8 +7,7 @@ import {
   EditOutlined, 
   DeleteOutlined, 
   ExpandOutlined,
-  ShareAltOutlined,
-  InfoCircleOutlined, 
+  ShareAltOutlined, 
   HeartOutlined,
   HeartFilled,
   MessageOutlined
@@ -19,19 +18,19 @@ const { Title, Text, Paragraph } = Typography;
 
 // Theme colors
 const themeColors = {
-  primary: "#FF6B35", // Vibrant orange for primary actions
-  secondary: "#FF9E44", // Lighter orange for secondary elements
-  accent: "#7DCE82", // Fresh green accent
-  background: "#FFF9F5", // Warm off-white background
-  surface: "#FFF0E6", // Slightly darker surface for contrast
-  cardBg: "#FFFFFF", // Crisp white for cards
-  textPrimary: "#2D2A32", // Dark charcoal for readability
-  textSecondary: "#6D6A75", // Medium gray for secondary text
-  border: "rgba(255, 107, 53, 0.15)", // Subtle orange-tinted border
-  hover: "#E85A24", // Darker orange for hover states
-  danger: "#FF5252", // Clear red for warnings
-  success: "#27AE60", // Fresh green for success messages
-  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", // Orange gradient
+  primary: "#FF6B35",
+  secondary: "#FF9E44", 
+  accent: "#7DCE82", 
+  background: "#FFF9F5", 
+  surface: "#FFF0E6", 
+  cardBg: "#FFFFFF",
+  textPrimary: "#2D2A32", 
+  textSecondary: "#6D6A75", 
+  border: "rgba(255, 107, 53, 0.15)", 
+  hover: "#E85A24", 
+  danger: "#FF5252",
+  success: "#27AE60", 
+  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", 
 };
 
 const SkillShareCard = ({ plan }) => {
@@ -40,6 +39,8 @@ const SkillShareCard = ({ plan }) => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewMedia, setPreviewMedia] = useState({ url: '', type: 'image' });
   const [liked, setLiked] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
   
   const deletePlan = async () => {
     try {
@@ -47,7 +48,7 @@ const SkillShareCard = ({ plan }) => {
       await SkillShareService.deleteSkillShare(plan.id);
       state.SkillShares = await SkillShareService.getAllSkillShares();
     } catch (error) {
-      console.error("Error deleting skill sharing post:", error);
+      console.error("Error deleting post:", error);
     } finally {
       setIsDeleteLoading(false);
     }
@@ -68,7 +69,6 @@ const SkillShareCard = ({ plan }) => {
             width: "100%", 
             height: 300, 
             objectFit: "cover", 
-            borderRadius: 8,
             cursor: "pointer" 
           }}
         />
@@ -86,7 +86,7 @@ const SkillShareCard = ({ plan }) => {
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 123, 255, 0.3);
+            background: rgba(255, 255, 255, 0.17);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -106,8 +106,7 @@ const SkillShareCard = ({ plan }) => {
           style={{ 
             width: "100%", 
             height: 300, 
-            objectFit: "cover", 
-            borderRadius: 8 
+            objectFit: "cover"
           }}
         />
       </div>
@@ -118,11 +117,10 @@ const SkillShareCard = ({ plan }) => {
     <>
       <Card
         style={{
-          width: "314%",
+          width: "100%",
           borderRadius: 12,
           overflow: "hidden",
-          marginBottom: 16,
-          boxShadow: "0 4px 12px rgba(90, 155, 255, 0.12)",
+          boxShadow: "0 4px 12px rgba(255,255,255,0.15)",
           border: `1px solid ${themeColors.border}`
         }}
         bodyStyle={{ padding: 0 }}
@@ -162,11 +160,6 @@ const SkillShareCard = ({ plan }) => {
           />
           
           <Row justify="space-between" align="middle" style={{ position: "relative", zIndex: 2 }}>
-            <Col>
-              <Title level={4} style={{ margin: 0, color: "white" }}>
-                Skill Sharing Post
-              </Title>
-            </Col>
             <Col>
               <Text style={{ color: "rgba(255, 255, 255, 0.8)" }}>
                 {new Date(plan.createdAt || Date.now()).toLocaleDateString()}
@@ -209,14 +202,26 @@ const SkillShareCard = ({ plan }) => {
           <Paragraph 
             style={{ 
               fontSize: 15, 
-              marginBottom: 16,
+              marginBottom: 8,
               whiteSpace: "pre-line",
-              color: themeColors.textPrimary
+              color: themeColors.textPrimary,
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: isExpanded ? "none" : 3, 
+              WebkitBoxOrient: "vertical",
+              maxHeight: isExpanded ? "none" : "4.5em", 
             }}
           >
-            <InfoCircleOutlined style={{ marginRight: 6 }} />
-            Description: {plan.mealDetails}
+            {plan.mealDetails}
           </Paragraph>
+          <Button 
+            type="link" 
+            style={{ padding: 0 }} 
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? "Read less" : "Read more"}
+          </Button>
+
           
           <Row justify="space-between" align="middle" style={{ marginTop: 16 }}>
             <Col>

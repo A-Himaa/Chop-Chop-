@@ -24,6 +24,8 @@ const SkillShareBox = () => {
 
   return (
     <div
+
+  // Search box for skill sharing
       className="my_post"
       onClick={() => {
         state.createSkillShareOpened = true;
@@ -47,7 +49,7 @@ const SkillShareBox = () => {
         overflow: "hidden"
       }}
     >
-      {/* Decorative circles matching the LearningProgressCard style */}
+      {/* Decoration for search box*/}
       <div 
         style={{ 
           position: "absolute", 
@@ -101,9 +103,11 @@ const SkillShareBox = () => {
             boxShadow: isHovered ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none"
           }}
         />
+
+
         <input
           type="text"
-          placeholder={`What skill are you sharing today, ${snap.currentUser?.username || "User"}?`}
+          placeholder={`Got a dish that’s too good to keep secret? Drop your recipe magic here!, ${snap.currentUser?.username || "User"}? 🤗`}
           style={{
             flexGrow: 1,
             border: "none",
@@ -111,13 +115,13 @@ const SkillShareBox = () => {
             borderRadius: "8px",
             color: themeColors.textPrimary,
             backgroundColor: "rgba(255, 255, 255, 0.85)",
-            fontSize: "14px",
+            fontSize: "17px",
             transition: "all 0.3s ease",
             boxShadow: isHovered ? "0 4px 12px rgba(0, 0, 0, 0.08)" : "0 2px 6px rgba(0, 0, 0, 0.04)",
             outline: "none"
           }}
-          readOnly // Making input read-only since the whole component is clickable
-          onClick={(e) => e.stopPropagation()} // Preventing input click from propagating
+          readOnly 
+          onClick={(e) => e.stopPropagation()}
         />
       </div>
     </div>
