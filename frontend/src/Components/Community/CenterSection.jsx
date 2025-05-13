@@ -147,13 +147,13 @@ const CenterSection = () => {
             src="/assets/chopchop.svg" 
             alt="logo" 
           />
-          <span style={{ 
+          {/* <span style={{ 
             background: themeColors.gradient,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent"
           }}>
             ChopChop
-          </span>
+          </span> */}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <Badge count={snap.notifications?.length || 0} offset={[-5, 5]}>
@@ -284,7 +284,7 @@ const CenterSection = () => {
                       }}>
                         <i className="fas fa-comment-slash" style={{ fontSize: "32px", marginBottom: "16px" }}></i>
                         <Title level={4}>No posts yet</Title>
-                        <p>Be the first to share something with your friends!</p>
+                        <p>Be the first to share the dish with your friends!</p>
                       </div>
                     ) : (
                       snap.posts.map((post, index) => {

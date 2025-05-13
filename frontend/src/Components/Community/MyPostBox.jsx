@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import state from "../../Utils/Store";
 import { useSnapshot } from "valtio";
 
-// Theme colors
+
 const themeColors = {
-  primary: "#FF6B35", // Vibrant orange for primary actions
-  secondary: "#FF9E44", // Lighter orange for secondary elements
-  accent: "#7DCE82", // Fresh green accent
-  background: "#FFF9F5", // Warm off-white background
-  surface: "#FFF0E6", // Slightly darker surface for contrast
-  cardBg: "#FFFFFF", // Crisp white for cards
-  textPrimary: "#2D2A32", // Dark charcoal for readability
-  textSecondary: "#6D6A75", // Medium gray for secondary text
-  border: "rgba(255, 107, 53, 0.15)", // Subtle orange-tinted border
-  hover: "#E85A24", // Darker orange for hover states
-  danger: "#FF5252", // Clear red for warnings
-  success: "#27AE60", // Fresh green for success messages
-  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", // Orange gradient
+  primary: "#FF6B35", 
+  secondary: "#FF9E44",
+  accent: "#7DCE82",
+  background: "#FFF9F5", 
+  surface: "#FFF0E6", 
+  cardBg: "#FFFFFF", 
+  textPrimary: "#2D2A32", 
+  textSecondary: "#6D6A75",
+  border: "rgba(255, 107, 53, 0.15)", 
+  hover: "#E85A24", 
+  danger: "#FF5252",
+  success: "#27AE60", 
+  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", 
 };
 
 const MyPost = () => {
@@ -104,7 +104,7 @@ const MyPost = () => {
         />
         <input
           type="text"
-          placeholder="Share your skill or experience"
+          placeholder="Drop Your Deliciousness Here 😋"
           style={{
             flexGrow: 1,
             border: "none",
@@ -112,13 +112,13 @@ const MyPost = () => {
             borderRadius: "8px",
             color: themeColors.textPrimary,
             backgroundColor: "rgba(255, 255, 255, 0.85)",
-            fontSize: "14px",
+            fontSize: "17px",
             transition: "all 0.3s ease",
             boxShadow: isHovered ? "0 4px 12px rgba(0, 0, 0, 0.08)" : "0 2px 6px rgba(0, 0, 0, 0.04)",
             outline: "none"
           }}
-          readOnly // Making input read-only since the whole component is clickable
-          onClick={(e) => e.stopPropagation()} // Preventing input click from propagating
+          readOnly 
+          onClick={(e) => e.stopPropagation()} 
         />
       </div>
     </div>

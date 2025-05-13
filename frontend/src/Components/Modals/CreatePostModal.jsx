@@ -7,25 +7,24 @@ import { UploadOutlined, FileImageOutlined, VideoCameraOutlined, InfoCircleOutli
 import PostService from "../../Services/PostService";
 
 const themeColors = {
-  primary: "#FF6B35", // Vibrant orange for primary actions
-  secondary: "#FF9E44", // Lighter orange for secondary elements
-  accent: "#7DCE82", // Fresh green accent
-  background: "#FFF9F5", // Warm off-white background
-  surface: "#FFF0E6", // Slightly darker surface for contrast
-  cardBg: "#FFFFFF", // Crisp white for cards
-  textPrimary: "#2D2A32", // Dark charcoal for readability
-  textSecondary: "#6D6A75", // Medium gray for secondary text
-  border: "rgba(255, 107, 53, 0.15)", // Subtle orange-tinted border
-  hover: "#E85A24", // Darker orange for hover states
-  danger: "#FF5252", // Clear red for warnings
-  success: "#27AE60", // Fresh green for success messages
-  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", // Orange gradient
+  primary: "#FF6B35", 
+  secondary: "#FF9E44", 
+  accent: "#7DCE82", 
+  background: "#FFF9F5",
+  surface: "#FFF0E6", 
+  cardBg: "#FFFFFF", 
+  textPrimary: "#2D2A32", 
+  textSecondary: "#6D6A75", 
+  border: "rgba(255, 107, 53, 0.15)", 
+  hover: "#E85A24",
+  danger: "#FF5252", 
+  success: "#27AE60", 
+  gradient: "linear-gradient(135deg, #FF6B35 0%, #FF9E44 100%)", 
 };
 
 const { Title, Text, Paragraph } = Typography;
 const uploader = new UploadFileService();
 
-// Food icons to display in the header instead of subtitle text
 const foodIcons = ["🍳", "🍅", "🥕", "🥗", "🍚", "🍲", "🍕", "🍣", "🥩", "🥑", "🌽", "🌮"];
 
 const CreatePostModal = () => {
@@ -47,6 +46,7 @@ const CreatePostModal = () => {
         userId: snap.currentUser?.uid,
         mediaType: fileType,
       };
+
       await PostService.createPost(body);
       state.posts = await PostService.getPosts();
       message.success("Recipe shared successfully");
@@ -110,8 +110,8 @@ const CreatePostModal = () => {
               src={image}
               alt="Recipe Preview"
               style={{
-                maxWidth: "100%",
-                maxHeight: "300px",
+                maxWidth: "75%",
+                maxHeight: "50%",
                 borderRadius: 12,
                 boxShadow: "0 4px 12px rgba(255, 107, 53, 0.15)"
               }}
@@ -146,8 +146,8 @@ const CreatePostModal = () => {
               controls
               src={image}
               style={{
-                maxWidth: "100%",
-                maxHeight: "300px",
+                maxWidth: "75%",
+                maxHeight: "50px",
                 borderRadius: 12,
                 boxShadow: "0 4px 12px rgba(255, 107, 53, 0.15)"
               }}
@@ -195,11 +195,11 @@ const CreatePostModal = () => {
               <CameraOutlined />
             </div>
             <Title level={4} style={{ margin: 0, color: themeColors.textPrimary }}>
-              Share Your Recipe
+              Share Your Yummy Dish
             </Title>
           </div>
           
-          {/* Food icons rolling under the title instead of subtitle text */}
+          
           <div style={{ 
             display: "flex",
             justifyContent: "center",
@@ -231,7 +231,7 @@ const CreatePostModal = () => {
             </div>
           </div>
           
-          {/* Decorative line */}
+         
           <div style={{ 
             height: "2px", 
             background: themeColors.gradient,
@@ -362,7 +362,7 @@ const CreatePostModal = () => {
         >
           <Input.TextArea
             rows={4}
-            placeholder="What did you cook? Share the recipe, ingredients, or your cooking experience..."
+            placeholder="What's on the menu? Share the recipe, ingredients, or your cooking experience..."
             style={{ 
               borderRadius: 12, 
               borderColor: themeColors.border,
