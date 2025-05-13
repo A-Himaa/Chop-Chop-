@@ -132,7 +132,7 @@ const UpdateStory = () => {
       try {
         const url = await uploader.uploadFile(
           info.fileList[0].originFileObj,
-          "workoutStories"
+          "CookingStories"
         );
         setUploadedImage(url);
       } catch (error) {
@@ -265,7 +265,7 @@ const UpdateStory = () => {
             </Col>
             <Col span={12}>
               <div>
-                <Text type="secondary">Exercise Type</Text>
+                <Text type="secondary">Recipe Type</Text>
                 <div>{workoutStory?.exerciseType || 'N/A'}</div>
               </div>
             </Col>
@@ -474,7 +474,7 @@ const UpdateStory = () => {
           <Form.Item label={
             <span style={{ display: 'flex', alignItems: 'center' }}>
               <TagOutlined style={{ marginRight: '8px', color: themeColors.primary }} />
-              Exercise Type
+              Recipe Type
             </span>
           } name="exerciseType">
             <Input
@@ -493,7 +493,7 @@ const UpdateStory = () => {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <span style={{ display: 'flex', alignItems: 'center' }}>
                   <ClockCircleOutlined style={{ marginRight: '8px', color: themeColors.primary }} />
-                  Training Duration
+                  Course Duration
                 </span>
                 <Text 
                   strong 
