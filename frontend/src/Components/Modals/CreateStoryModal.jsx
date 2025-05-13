@@ -64,7 +64,7 @@ const CreateStoryModal = () => {
     title: "",
     description: "",
     timestamp: null,
-    exerciseType: "",
+    practicalType: "",
     timeDuration: 30,
     intensity: "",
     image: ""
@@ -509,11 +509,11 @@ const CreateStoryModal = () => {
             </span>
             <InfoCircleOutlined style={{ color: themeColors.textSecondary }} />
           </div>
-        } name="exerciseType">
+        } name="practicalType">
           <Input
             placeholder="What type of Recipe?"
-            name="exerciseType"
-            value={formData.exerciseType}
+            name="practicalType"
+            value={formData.practicalType}
             onChange={handleInputChange}
             style={{ 
               borderRadius: 12, 
