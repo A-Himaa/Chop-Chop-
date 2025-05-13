@@ -17,7 +17,7 @@ public class StoryStatusUpdate {
     private String title;
     private String image;
     private String description;
-    private String practicalType;
+    private String recipeType;
     private int timeDuration;
     private String intensity;
 
