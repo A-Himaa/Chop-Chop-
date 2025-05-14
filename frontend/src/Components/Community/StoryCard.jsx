@@ -16,8 +16,8 @@ const StoryCard = ({ card }) => {
   return (
     <div
       onClick={() => {
-        state.selectedWorkoutStory = card;
-        state.workoutStoryOpen = true;
+        state.selectedCookingStory = card;
+        state.CookingStoryOpen = true;
       }}
       class="story_card"
     >

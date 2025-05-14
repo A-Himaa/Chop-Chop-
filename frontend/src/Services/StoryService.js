@@ -2,7 +2,7 @@ import axios from "axios";
 import { BASE_URL } from "../constants";
 
 class StoryUpdateService {
-  async createWorkoutStory(workoutStoryData) {
+  async createCookingStory(CookingStoryData) {
     const accessToken = localStorage.getItem("accessToken");
     const config = {
       headers: {
@@ -11,8 +11,8 @@ class StoryUpdateService {
     };
     try {
       const response = await axios.post(
-        `${BASE_URL}/workoutStatusUpdates`,
-        workoutStoryData,
+        `${BASE_URL}/cookStatusUpdates`,
+        CookingStoryData,
         config
       );
       return response.data;
@@ -30,7 +30,7 @@ class StoryUpdateService {
         },
       };
       const response = await axios.get(
-        `${BASE_URL}/workoutStatusUpdates/${userId}`,
+        `${BASE_URL}/cookStatusUpdates/${userId}`,
         config
       );
       return response.data;
@@ -48,7 +48,7 @@ class StoryUpdateService {
         },
       };
       const response = await axios.get(
-        `${BASE_URL}/workoutStatusUpdates`,
+        `${BASE_URL}/cookStatusUpdates`,
         config
       );
       return response.data;
@@ -57,7 +57,7 @@ class StoryUpdateService {
     }
   }
 
-  async deleteWorkoutStory(updateId) {
+  async deleteCookingStory(updateId) {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const config = {
@@ -66,14 +66,14 @@ class StoryUpdateService {
         },
       };
       await axios.delete(
-        `${BASE_URL}/workoutStatusUpdates/${updateId}`,
+        `${BASE_URL}/cookStatusUpdates/${updateId}`,
         config
       );
     } catch (error) {
       throw new Error("Failed to delete Learning Plan story");
     }
   }
-  async UpdateStory(updateId, workoutStoryData) {
+  async UpdateStory(updateId, CookingStoryData) {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const config = {
@@ -82,8 +82,8 @@ class StoryUpdateService {
         },
       };
       const response = await axios.put(
-        `${BASE_URL}/workoutStatusUpdates/${updateId}`,
-        workoutStoryData,
+        `${BASE_URL}/cookStatusUpdates/${updateId}`,
+        CookingStoryData,
         config
       );
       return response.data;

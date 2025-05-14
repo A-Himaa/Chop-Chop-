@@ -4,7 +4,7 @@ import "../Styles/community.css";
 import CenterSection from "../Components/Community/CenterSection";
 import UserProfileModal from "../Components/Modals/UserProfileModal";
 import CreateStoryModal from "../Components/Modals/CreateStoryModal";
-import WorkoutStory from "../Components/Modals/UpdateStory";
+import CookingStory from "../Components/Modals/UpdateStory";
 import StoryService from "../Services/StoryService";
 import state from "../Utils/Store";
 import { useSnapshot } from "valtio";
@@ -142,7 +142,7 @@ const Community = () => {
       <CreateStoryModal />
       <CreateLearningProgressModal />
       <CreateSkillShareModal />
-      {snap.selectedWorkoutStory && <WorkoutStory />}
+      {snap.selectedCookingStory && <CookingStory />}
       <CreatePostModal />
       {snap.selectedPost && <UploadPostModal />}
       {snap.selectedLearningProgress && <EditLearningProgressModal />}

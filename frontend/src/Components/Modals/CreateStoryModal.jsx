@@ -89,7 +89,7 @@ const CreateStoryModal = () => {
     return '#f5222d';                        // Red - Very Intense
   };
 
-  const handleCreateWorkoutStory = async () => {
+  const handleCreateCookingStory = async () => {
     try {
       setLoading(true);
       const body = {
@@ -98,7 +98,7 @@ const CreateStoryModal = () => {
         userId: snap.currentUser?.uid,
       };
       
-      await StoryService.createWorkoutStory(body);
+      await StoryService.createCookingStory(body);
       state.storyCards = await StoryService.getAllWorkoutStories();
       message.success("Learning Plan created successfully");
       
@@ -119,7 +119,7 @@ const CreateStoryModal = () => {
       try {
         const url = await uploader.uploadFile(
           info.fileList[0].originFileObj,
-          "workoutStories"
+          "CookingStories"
         );
         setUploadedImage(url);
       } catch (error) {
@@ -272,7 +272,7 @@ const CreateStoryModal = () => {
             loading={loading}
             key="create"
             type="primary"
-            onClick={handleCreateWorkoutStory}
+            onClick={handleCreateCookingStory}
             style={{
               background: themeColors.gradient,
               borderColor: themeColors.primary,

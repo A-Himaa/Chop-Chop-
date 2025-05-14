@@ -51,7 +51,7 @@ const { Text, Title } = Typography;
 
 const UpdateStory = () => {
   const snap = useSnapshot(state);
-  const workoutStory = snap.selectedWorkoutStory;
+  const CookingStory = snap.selectedCookingStory;
   const userId = snap.currentUser?.id;
   const [imageUploading, setImageUploading] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -70,41 +70,41 @@ const UpdateStory = () => {
   });
 
   useEffect(() => {
-    if (workoutStory) {
+    if (CookingStory) {
       setFormData({
-        title: workoutStory.title || "",
-        description: workoutStory.description || "",
-        timestamp: workoutStory.timestamp ? moment(workoutStory.timestamp) : null,
-        exerciseType: workoutStory.exerciseType || "",
-        timeDuration: workoutStory.timeDuration || 30,
-        intensity: workoutStory.intensity || "",
-        image: workoutStory.image || ""
+        title: CookingStory.title || "",
+        description: CookingStory.description || "",
+        timestamp: CookingStory.timestamp ? moment(CookingStory.timestamp) : null,
+        exerciseType: CookingStory.exerciseType || "",
+        timeDuration: CookingStory.timeDuration || 30,
+        intensity: CookingStory.intensity || "",
+        image: CookingStory.image || ""
       });
       
       form.setFieldsValue({
-        title: workoutStory.title,
-        description: workoutStory.description,
-        timestamp: workoutStory.timestamp ? moment(workoutStory.timestamp) : null,
-        exerciseType: workoutStory.exerciseType,
-        timeDuration: workoutStory.timeDuration || 30,
-        intensity: workoutStory.intensity
+        title: CookingStory.title,
+        description: CookingStory.description,
+        timestamp: CookingStory.timestamp ? moment(CookingStory.timestamp) : null,
+        exerciseType: CookingStory.exerciseType,
+        timeDuration: CookingStory.timeDuration || 30,
+        intensity: CookingStory.intensity
       });
     }
-  }, [workoutStory, form]);
+  }, [CookingStory, form]);
 
   const handleUpdateStory = async () => {
     try {
       setLoading(true);
       const body = {
         ...formData,
-        image: uploadedImage || workoutStory.image,
+        image: uploadedImage || CookingStory.image,
       };
       
-      await StoryService.UpdateStory(workoutStory.id, body);
+      await StoryService.UpdateStory(CookingStory.id, body);
       state.storyCards = await StoryService.getAllWorkoutStories();
       message.success("Learning Plan updated successfully");
       
-      state.workoutStoryOpen = false;
+      state.CookingStoryOpen = false;
     } catch (error) {
       message.error("Error updating Learning Plan");
     } finally {
@@ -115,9 +115,9 @@ const UpdateStory = () => {
   const handleDelete = async () => {
     try {
       setDeleteLoading(true);
-      await StoryService.deleteWorkoutStory(workoutStory.id);
+      await StoryService.deleteCookingStory(CookingStory.id);
       state.storyCards = await StoryService.getAllWorkoutStories();
-      state.workoutStoryOpen = false;
+      state.CookingStoryOpen = false;
       message.success("Learning Plan deleted successfully");
     } catch (error) {
       message.error("Failed to delete Learning Plan");
@@ -184,7 +184,7 @@ const UpdateStory = () => {
     return '#f5222d';                        // Red - Very Intense
   };
 
-  if (userId !== workoutStory?.userId) {
+  if (userId !== CookingStory?.userId) {
     return (
       <Modal
         title={
@@ -201,9 +201,9 @@ const UpdateStory = () => {
             </Title>
           </div>
         }
-        open={snap.workoutStoryOpen}
+        open={snap.CookingStoryOpen}
         onCancel={() => {
-          state.workoutStoryOpen = false;
+          state.CookingStoryOpen = false;
         }}
         width={500}
         bodyStyle={{ 
@@ -216,7 +216,7 @@ const UpdateStory = () => {
         footer={[
           <Button 
             key="close" 
-            onClick={() => (state.workoutStoryOpen = false)}
+            onClick={() => (state.CookingStoryOpen = false)}
             style={{
               borderRadius: '6px',
             }}
@@ -241,7 +241,7 @@ const UpdateStory = () => {
             marginBottom: '16px'
           }}>
             <img 
-              src={workoutStory?.image} 
+              src={CookingStory?.image} 
               style={{ 
                 width: '100%', 
                 height: '200px', 
@@ -254,26 +254,26 @@ const UpdateStory = () => {
             <Col span={16}>
               <div>
                 <Text type="secondary">Title</Text>
-                <div style={{ fontSize: '16px', fontWeight: 500 }}>{workoutStory?.title}</div>
+                <div style={{ fontSize: '16px', fontWeight: 500 }}>{CookingStory?.title}</div>
               </div>
             </Col>
             <Col span={8}>
               <div>
                 <Text type="secondary">Date</Text>
-                <div>{workoutStory?.timestamp ? moment(workoutStory.timestamp).format('YYYY-MM-DD') : 'N/A'}</div>
+                <div>{CookingStory?.timestamp ? moment(CookingStory.timestamp).format('YYYY-MM-DD') : 'N/A'}</div>
               </div>
             </Col>
             <Col span={12}>
               <div>
                 <Text type="secondary">Recipe Type</Text>
-                <div>{workoutStory?.exerciseType || 'N/A'}</div>
+                <div>{CookingStory?.exerciseType || 'N/A'}</div>
               </div>
             </Col>
             <Col span={12}>
               <div>
                 <Text type="secondary">Duration</Text>
-                <div style={{ color: getIntensityColor(workoutStory?.timeDuration || 0) }}>
-                  {workoutStory?.timeDuration || 0} minutes
+                <div style={{ color: getIntensityColor(CookingStory?.timeDuration || 0) }}>
+                  {CookingStory?.timeDuration || 0} minutes
                 </div>
               </div>
             </Col>
@@ -283,12 +283,12 @@ const UpdateStory = () => {
                 <div>
                   <FireOutlined style={{ 
                     marginRight: '8px',
-                    color: workoutStory?.intensity === 'No Efforts' ? '#52c41a' :
-                           workoutStory?.intensity === 'Mid Efforts' ? '#1890ff' :
-                           workoutStory?.intensity === 'Moderate Efforts' ? '#faad14' :
-                           workoutStory?.intensity === 'Severe Efforts' ? '#f5222d' : '#722ed1'
+                    color: CookingStory?.intensity === 'No Efforts' ? '#52c41a' :
+                           CookingStory?.intensity === 'Mid Efforts' ? '#1890ff' :
+                           CookingStory?.intensity === 'Moderate Efforts' ? '#faad14' :
+                           CookingStory?.intensity === 'Severe Efforts' ? '#f5222d' : '#722ed1'
                   }} />
-                  {workoutStory?.intensity || 'N/A'}
+                  {CookingStory?.intensity || 'N/A'}
                 </div>
               </div>
             </Col>
@@ -296,7 +296,7 @@ const UpdateStory = () => {
               <Divider style={{ margin: '8px 0', background: themeColors.border }} />
               <div>
                 <Text type="secondary">Description</Text>
-                <div style={{ marginTop: '8px', whiteSpace: 'pre-wrap' }}>{workoutStory?.description || 'No description provided.'}</div>
+                <div style={{ marginTop: '8px', whiteSpace: 'pre-wrap' }}>{CookingStory?.description || 'No description provided.'}</div>
               </div>
             </Col>
           </Row>
@@ -321,9 +321,9 @@ const UpdateStory = () => {
           </Title>
         </div>
       }
-      open={snap.workoutStoryOpen}
+      open={snap.CookingStoryOpen}
       onCancel={() => {
-        state.workoutStoryOpen = false;
+        state.CookingStoryOpen = false;
       }}
       width={650}
       bodyStyle={{ 
@@ -355,7 +355,7 @@ const UpdateStory = () => {
         >
           <Row gutter={24}>
             <Col span={24}>
-              {(uploadedImage || workoutStory?.image) ? (
+              {(uploadedImage || CookingStory?.image) ? (
                 <div style={{ 
                   borderRadius: '10px', 
                   overflow: 'hidden',
@@ -369,7 +369,7 @@ const UpdateStory = () => {
                       height: "200px",
                       objectFit: 'cover'
                     }}
-                    src={uploadedImage || workoutStory?.image}
+                    src={uploadedImage || CookingStory?.image}
                     alt="Learning Plan"
                   />
                   <div style={{
@@ -599,7 +599,7 @@ const UpdateStory = () => {
           >
             <Button 
               key="cancel" 
-              onClick={() => (state.workoutStoryOpen = false)}
+              onClick={() => (state.CookingStoryOpen = false)}
               style={{
                 borderRadius: '6px',
               }}

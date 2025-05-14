@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/workoutStatusUpdates")
+@RequestMapping("/api/cookStatusUpdates")
 public class StoryStatusUpdateController {
 
     private final StoryStatusUpdateRepository workoutStatusUpdateRepository;
