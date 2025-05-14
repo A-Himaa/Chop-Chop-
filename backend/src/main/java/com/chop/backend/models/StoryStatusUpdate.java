@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
-@Document(collection = "workoutStatusUpdates")
+@Document(collection = "cookingStatusUpdates")
 @Getter
 @Setter
 public class StoryStatusUpdate {
@@ -17,7 +17,7 @@ public class StoryStatusUpdate {
     private String title;
     private String image;
     private String description;
-    private String exerciseType;
+    private String recipeType;
     private int timeDuration;
     private String intensity;
 

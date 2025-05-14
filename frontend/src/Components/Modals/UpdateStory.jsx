@@ -63,7 +63,7 @@ const UpdateStory = () => {
     title: "",
     description: "",
     timestamp: null,
-    exerciseType: "",
+    recipeType: "",
     timeDuration: 30,
     intensity: "",
     image: ""
@@ -75,7 +75,7 @@ const UpdateStory = () => {
         title: workoutStory.title || "",
         description: workoutStory.description || "",
         timestamp: workoutStory.timestamp ? moment(workoutStory.timestamp) : null,
-        exerciseType: workoutStory.exerciseType || "",
+        recipeType: workoutStory.recipeType || "",
         timeDuration: workoutStory.timeDuration || 30,
         intensity: workoutStory.intensity || "",
         image: workoutStory.image || ""
@@ -85,7 +85,7 @@ const UpdateStory = () => {
         title: workoutStory.title,
         description: workoutStory.description,
         timestamp: workoutStory.timestamp ? moment(workoutStory.timestamp) : null,
-        exerciseType: workoutStory.exerciseType,
+        recipeType: workoutStory.recipeType,
         timeDuration: workoutStory.timeDuration || 30,
         intensity: workoutStory.intensity
       });
@@ -265,8 +265,8 @@ const UpdateStory = () => {
             </Col>
             <Col span={12}>
               <div>
-                <Text type="secondary">Exercise Type</Text>
-                <div>{workoutStory?.exerciseType || 'N/A'}</div>
+                <Text type="secondary">Recipe Type</Text>
+                <div>{workoutStory?.recipeType || 'N/A'}</div>
               </div>
             </Col>
             <Col span={12}>
@@ -474,13 +474,13 @@ const UpdateStory = () => {
           <Form.Item label={
             <span style={{ display: 'flex', alignItems: 'center' }}>
               <TagOutlined style={{ marginRight: '8px', color: themeColors.primary }} />
-              Exercise Type
+              Recipe Type
             </span>
-          } name="exerciseType">
+          } name="recipeType">
             <Input
-              placeholder="What type of exercise?"
-              name="exerciseType"
-              value={formData.exerciseType}
+              placeholder="What type of recipe?"
+              name="recipeType"
+              value={formData.recipeType}
               onChange={handleInputChange}
               style={{ borderRadius: '6px' }}
             />
